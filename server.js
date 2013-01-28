@@ -5,7 +5,7 @@ var express = require('express'),
 app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.session({ secret: "godel, escher, bach" }));
-  app.use(express.favicon(__dirname + '/public/img/emme.png'))
+  app.use(express.favicon(__dirname + '/public/images/picatrix.png'))
   app.use(express.methodOverride());
   app.use(express.bodyParser());
   app.use(app.router);
