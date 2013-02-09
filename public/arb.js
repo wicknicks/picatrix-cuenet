@@ -5,7 +5,7 @@ var arb_data = [
 {ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
 {ts: 0, nid: '4', type: 'literal', text: 'Name: Arjun Satish'},
 {ts: 0, nid: '5', type: 'literal', text: 'URL: http://some.url/ach.jpg'},
-{ts: 4, nid: '6', type: 'node', diameter: 15, color: 'red', ontClass: "meeting", literals: ['14', '15']},
+{ts: 4, nid: '6', type: 'node', diameter: 15, color: '#FF7733', ontClass: "meeting", literals: ['14', '15']},
 {ts: 2000, nid: '7', type: 'edge', start: '6', end: '1', ontClass: "subevent"},
 {ts: 2010, nid: '8', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '4']},
 {ts: 2020, nid: '9', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '18']},
@@ -177,7 +177,7 @@ var Renderer = function(canvas) {
       ix++;
       arb_data.push(l1);
       var p = {ts: 8000+i, nid: '' + ix, type: 'node', diameter: 3, 
-               color: '#9933FF', ontClass: "person", literals: [l1.nid, 17]};
+               color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
       ix++;
       arb_data.push(p);
       var e = {ts: 8000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '22', ontClass: "participates-in"};
