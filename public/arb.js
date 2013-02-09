@@ -7,7 +7,7 @@ var arb_data = [
 {ts: 0, nid: '5', type: 'literal', text: 'URL: http://some.url/ach.jpg'},
 {ts: 4, nid: '6', type: 'node', diameter: 15, color: '#FF7733', ontClass: "meeting", literals: ['14', '15']},
 {ts: 2000, nid: '7', type: 'edge', start: '6', end: '1', ontClass: "subevent"},
-{ts: 2010, nid: '8', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '4']},
+{ts: 2010, nid: '8', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '26']},
 {ts: 2020, nid: '9', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '18']},
 {ts: 2030, nid: '10', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '19']},
 {ts: 4000, nid: '11', type: 'edge', start: '8', end: '6', ontClass: "participates-in"},
@@ -24,7 +24,8 @@ var arb_data = [
 {ts: 8000, nid: '22', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['23', '24']},
 {ts: 8010, nid: '23', type: 'literal', text: 'OntClass: conference'},
 {ts: 8020, nid: '24', type: 'literal', text: 'Title: ICMR 2013'},
-{ts: 10000, nid: '25', type: 'edge', start: '22', end: '6', ontClass: "subevent"}
+{ts: 10000, nid: '25', type: 'edge', start: '22', end: '6', ontClass: "subevent"},
+{ts: 4000, nid: '26', type: 'literal', text: 'Name: Ramesh Jain'}
 ];
 
 var Renderer = function(canvas) {
@@ -146,10 +147,10 @@ var Renderer = function(canvas) {
       lnodes.push(lit_node); ledges.push(lit_edge);
     }
     
-    setTimeout(function() {
+    /*setTimeout(function() {
       for (var i=0; i<lnodes.length; i++) sys.pruneNode(lnodes[i]);
       //for (var i=0; i<ledges.length-1; i++) sys.pruneEdge(ledges[i+1]);
-    }, 10000);
+    }, 10000);*/
   }
   
   var edgeMap = {};
@@ -171,7 +172,7 @@ var Renderer = function(canvas) {
     $('canvas')[0].height = $(window).height() - 15;
   
     //add some hundred participants to conference event in conference arb_data
-    var ix = 26;
+    var ix = 27;
     for (var i = 1; i<=50; i++) {
       var l1 = {ts: 8000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
       ix++;
