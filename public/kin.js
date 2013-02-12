@@ -36,7 +36,7 @@
       var metadataCircle = new Kinetic.Circle({
         x: stage.getWidth() / 2,
         y: stage.getHeight() / 2,
-        radius: 200,
+        radius: 150,
         fill: '#b9cde5',
         stroke: '#7a96bb',
         strokeWidth: 4
@@ -45,7 +45,7 @@
       var dataCircle = new Kinetic.Circle({
         x: stage.getWidth() / 2,
         y: stage.getHeight() / 2,
-        radius: 150,
+        radius: 100,
         fill: '#ffffff',
         stroke: '#7a96bb',
         strokeWidth: 4
