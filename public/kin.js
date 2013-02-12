@@ -1,7 +1,7 @@
 var stage = new Kinetic.Stage({
   container: 'container',
-  width: $(window).width(),
-  height: $(window).height()
+  width: 625,
+  height: 625
 });
 
 var layer = new Kinetic.Layer();
@@ -67,23 +67,53 @@ imageObj.onload = function() {
   stage.add(imgLayer);
 };
 
-var fbSourceImageObj = new Image();
-var fbTouchedImageObj = new Image();
-var fbImages = [fbSourceImageObj, fbTouchedImageObj]
-var fbSourceDispArea = null;
-var fImage = null;
-fbSourceImageObj.onload = function() {
-  fbSourceDispArea = new Kinetic.Layer();
-  fImage = new Kinetic.Image({
-    x: stage.getWidth()/2 - 210,
-    y: stage.getHeight()/2 - 150,
-    image: fbSourceImageObj,
-    width: fbSourceImageObj.width / 2,
-    height: fbSourceImageObj.height / 2
-  });
-  fbSourceDispArea.add(fImage);
-  stage.add(fbSourceDispArea);
+var icons = [ ['images/sources/time.png', 'images/sources/bright.150.png', 100, -40],
+['images/sources/maps-icon.png', 'images/sources/bright.150.png', -150, -40],
+['images/sources/google-calendar.png', 'images/sources/bright.150.png', 100, -150],
+['images/sources/facebook.png', 'images/sources/bright.150.png', -25, -250],
+['images/sources/upcoming-round.png', 'images/sources/bright.150.png', -170, -250],
+['images/sources/yelp.png', 'images/sources/bright.150.png', 130, -250],
+['images/sources/gmail.png', 'images/sources/bright.150.png', -150, -150] ];
+
+var ix = 3;
+var iconOffset = 0;
+var highlightedIconOffset = 1;
+var xOffset = 2;
+var yOffset = 3;
+
+var sourceIcons = [];
+
+for (var i=0; i<icons.length; i++) {
+
+  var sourceIcon = new Image();
+  var highlightedSourceIcon = new Image();
+  var images = [sourceIcon, highlightedSourceIcon];
+  sourceIcon.onload = function() {
+  
+    var iconDisplayArea = new Kinetic.Layer();
+    var j = this.index;
+    var image = new Kinetic.Image( {
+      image: this,
+      width: this.width / 2,
+      height: this.height / 2
+    });
+    
+    image.setX (stage.getWidth() / 2 + icons[j][xOffset]);
+    image.setY (stage.getHeight() / 2 + icons[j][yOffset]);
+    
+    iconDisplayArea.add(image);
+    stage.add(iconDisplayArea);
+  }
+  
+  sourceIcon.src = icons[i][iconOffset];
+  sourceIcon.index = i;
+  highlightedSourceIcon.src = icons[i][highlightedIconOffset];
+
+  sourceIcons.push(sourceIcon);
+
 }
+
+imageObj.src = 'images/thumbs/DSC_0402.JPG';
 
 // add the shape to the layer
 layer.add(publicDataCircle);
@@ -93,10 +123,7 @@ layer.add(metadataCircle);
 layer.add(dataCircle);
 stage.add(layer);
 
-imageObj.src = 'images/thumbs/DSC_0402.JPG';
-fbSourceImageObj.src = 'images/sources/bright.150.png';
-fbTouchedImageObj.src = 'images/sources/1.png';
-
+/*
 var ix = 1;
 var id = setInterval( function() {
   fImage.setImage(fbImages[ix]);
@@ -106,3 +133,4 @@ var id = setInterval( function() {
 
 setTimeout(function() {clearInterval(id)}, 20000); 
 console.log('interval id: ' + id);
+*/
