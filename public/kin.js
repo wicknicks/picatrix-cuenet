@@ -1,7 +1,7 @@
 var stage = new Kinetic.Stage({
   container: 'container',
-  width: 625,
-  height: 625
+  width: $(window).width()-50,
+  height: 85
 });
 
 var layer = new Kinetic.Layer();
@@ -67,54 +67,71 @@ imageObj.onload = function() {
   stage.add(imgLayer);
 };
 
-var icons = [ ['images/sources/time.png', 'images/sources/bright.150.png', 100, -40],
-['images/sources/maps-icon.png', 'images/sources/bright.150.png', -150, -40],
-['images/sources/google-calendar.png', 'images/sources/bright.150.png', 100, -150],
-['images/sources/facebook.png', 'images/sources/bright.150.png', -25, -250],
-['images/sources/upcoming-round.png', 'images/sources/bright.150.png', -170, -250],
-['images/sources/yelp.png', 'images/sources/bright.150.png', 130, -250],
-['images/sources/gmail.png', 'images/sources/bright.150.png', -150, -150] ];
+
+var icons = [ ['images/sources/clock-red.png', 'images/sources/brights/clock-red.png'],
+['images/sources/maps-icon.png', 'images/sources/brights/maps-icon.png'],
+['images/sources/gmail.png', 'images/sources/brights/gmail.png'],
+['images/sources/google-calendar.png', 'images/sources/brights/google-calendar.png'],
+['images/sources/facebook.png', 'images/sources/brights/facebook.png'],
+['images/sources/upcoming-logo.png', 'images/sources/brights/upcoming-logo.png'],
+['images/sources/yelp-icon.png', 'images/sources/brights/yelp-icon.png'] ];
 
 var ix = 3;
 var iconOffset = 0;
-var highlightedIconOffset = 1;
+var bwIconOffset = 1;
 var xOffset = 2;
-var yOffset = 3;
+var yOffset = -25;
 
+var imagesArr = [];
 var sourceIcons = [];
 
 for (var i=0; i<icons.length; i++) {
 
   var sourceIcon = new Image();
-  var highlightedSourceIcon = new Image();
-  var images = [sourceIcon, highlightedSourceIcon];
+  var bwSourceIcon = new Image();
+  var images = [sourceIcon, bwSourceIcon];
+  imagesArr.push(images);
   sourceIcon.onload = function() {
   
     var iconDisplayArea = new Kinetic.Layer();
     var j = this.index;
-    var image = new Kinetic.Image( {
+    var image = new Kinetic.Image({
       image: this,
       width: this.width / 2,
       height: this.height / 2
     });
     
-    image.setX (stage.getWidth() / 2 + icons[j][xOffset]);
-    image.setY (stage.getHeight() / 2 + icons[j][yOffset]);
+    image.setX ((j * stage.getWidth() / (icons.length)) + 50);
+    image.setY (stage.getHeight() / 2 + yOffset);
     
     iconDisplayArea.add(image);
+    sourceIcons.push(image);
     stage.add(iconDisplayArea);
   }
   
   sourceIcon.src = icons[i][iconOffset];
   sourceIcon.index = i;
-  highlightedSourceIcon.src = icons[i][highlightedIconOffset];
-
-  sourceIcons.push(sourceIcon);
+  bwSourceIcon.src = icons[i][bwIconOffset];
 
 }
 
-imageObj.src = 'images/thumbs/DSC_0402.JPG';
+//imageObj.src = 'images/thumbs/DSC_0402.JPG';
 
+var rectPanel = new Kinetic.Rect({
+  width: $(window).width() - 50,
+  height: 125,
+  fill: 'green',
+  stroke: 'black',
+  strokeWidth: '1px'
+});
+
+rectPanel.setOpacity(0.3);
+layer.add(rectPanel);
+stage.add(layer);
+
+
+
+/*
 // add the shape to the layer
 layer.add(publicDataCircle);
 layer.add(socialDataCircle);
@@ -122,15 +139,14 @@ layer.add(personalDataCircle);
 layer.add(metadataCircle);
 layer.add(dataCircle);
 stage.add(layer);
+*/
 
-/*
-var ix = 1;
+
+
 var id = setInterval( function() {
-  fImage.setImage(fbImages[ix]);
-  fbSourceDispArea.draw();
-  ix = (ix + 1) % fbImages.length;
+  
 }, 1000);
 
-setTimeout(function() {clearInterval(id)}, 20000); 
+setTimeout(function() { clearInterval(id) }, 20000); 
 console.log('interval id: ' + id);
-*/
+
