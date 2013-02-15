@@ -175,12 +175,13 @@ var Renderer = function(canvas) {
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
     
-    var j=0;
-    for (var i=0; i<arb_data.length; i++) {
-      setTimeout( function() {
-        render_node(sys, j++);
-      }, arb_data[i].ts);
-    }
+    setTimeout( function() {
+      var j=0;
+      for (var i=0; i<arb_data.length; i++) {
+        setTimeout( function() {
+          render_node(sys, j++);
+        }, arb_data[i].ts);
+      }
+    }, 1000);
   });
-  
 

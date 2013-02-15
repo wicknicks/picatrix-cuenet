@@ -1,10 +1,10 @@
 var arb_data = [
-{ts: 1, nid: '1', type: 'node', diameter: 10, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16']},
-{ts: 2, nid: '2', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['4', '17']},
+{ts: 1, nid: '1', type: 'node', diameter: 10, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16'], src: 'time'},
+{ts: 2, nid: '2', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['4', '17'], src: 'space'},
 {ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
 {ts: 0, nid: '4', type: 'literal', text: 'Name: Arjun Satish'},
 {ts: 0, nid: '5', type: 'literal', text: 'URL: http://some.url/ach.jpg'},
-{ts: 1500, nid: '6', type: 'node', diameter: 15, color: '#FF7733', ontClass: "meeting", literals: ['14', '15'], src: 'google-calendar'},
+{ts: 1500, nid: '6', type: 'node', diameter: 15, color: '#FF7733', ontClass: "meeting", literals: ['14', '15'], src: 'calendar'},
 {ts: 2000, nid: '7', type: 'edge', start: '6', end: '1', ontClass: "subevent"},
 {ts: 2010, nid: '8', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '26']},
 {ts: 2020, nid: '9', type: 'node', diameter: 10, color: 'blue', ontClass: "person", literals: ['17', '18']},

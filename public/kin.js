@@ -99,7 +99,7 @@ function render_circle(j) {
   if (arb_data[j].src == 'time') p = 0;
   else if (arb_data[j].src == 'space') p = 1;
   else if (arb_data[j].src == 'gmail') p = 2;
-  else if (arb_data[j].src == 'google-calendar') p = 3;
+  else if (arb_data[j].src == 'calendar') p = 3;
   else if (arb_data[j].src == 'facebook') p = 4;
   else if (arb_data[j].src == 'twitter') p = 5;
   else if (arb_data[j].src == 'dblp') p = 6;
@@ -112,12 +112,14 @@ function render_circle(j) {
 }
 
 $(document).ready(function() {
-  var j=0;
-  for (var i=0; i<arb_data.length; i++) {
-     setTimeout(function() {
-       render_circle(j++);
-     }, arb_data[i].ts);
-  }
+  setTimeout(function() {
+    var j=0;
+    for (var i=0; i<arb_data.length; i++) {
+       setTimeout(function() {
+         render_circle(j++);
+       }, arb_data[i].ts);
+    }
+  }, 1000)
 });
 
 /*
