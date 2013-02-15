@@ -42,7 +42,8 @@ for (var i = 1; i<=45; i++) {
   arb_data.push(e);
 }
 
-arb_data.push({ts: 21000, nid: '162', type: 'prune', edge: '38', src: 'facebook'});
+arb_data.push({ts: 20000, nid: '162', type: 'source', src: 'facebook'});
+arb_data.push({ts: 21000, nid: '162', type: 'prune', edge: '38'});
 arb_data.push({ts: 22000, nid: '163', type: 'edge', start: '37', end: '1', ontClass: "participates-in"});
 
 
