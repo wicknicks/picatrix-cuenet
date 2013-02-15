@@ -14,8 +14,16 @@ var Renderer = function(canvas) {
       },
       
       redraw:function() {
-        ctx.fillStyle = "white";
-        ctx.fillRect(0,0, canvas.width, canvas.height);
+      
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = '#CC5422'; // set canvas background color
+        ctx.fillRect(0, 0, canvas.width, canvas.height);  // now fill the canvas
+        ctx.globalAlpha = 1.0;
+      
+        //ctx.fillStyle = "white";
+        //ctx.fillRect(0,0, canvas.width, canvas.height);
         
         particleSystem.eachEdge(function(edge, pt1, pt2) {
           ctx.strokeStyle = "rgba(0,0,0, .333)";
@@ -63,7 +71,9 @@ var Renderer = function(canvas) {
         var handler = {
           clicked:function(e) {
             var pos = $(canvas).offset();
+            console.log(pos);
             _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
+            console.log(_mouseP);
             dragged = particleSystem.nearest(_mouseP);
 
             if (dragged && dragged.node !== null) dragged.node.fixed = true
@@ -140,12 +150,13 @@ var Renderer = function(canvas) {
   
   $(document).ready(function() {
   
-    $('canvas')[0].width = $(window).width() - 15;
-    $('canvas')[0].height = $(window).height() - 15;
-  
+    //$('canvas')[0].width = $(window).width() - 15;
+    //$('canvas')[0].height = $(window).height() - 15;
+
+      
     //add some hundred participants to conference event in conference arb_data
     var ix = 27;
-    for (var i = 1; i<=50; i++) {
+    for (var i = 1; i<=45; i++) {
       var l1 = {ts: 8000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
       ix++;
       arb_data.push(l1);
@@ -156,8 +167,10 @@ var Renderer = function(canvas) {
       var e = {ts: 8000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '22', ontClass: "participates-in"};
       ix++;
       arb_data.push(e);
-    }   
-    var sys = arbor.ParticleSystem(1000, 600, 0.5);
+    }
+    
+    
+    var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
     
