@@ -47,4 +47,74 @@ arb_data.push({ts: 21000, nid: '162', type: 'prune', edge: '38'});
 arb_data.push({ts: 22000, nid: '163', type: 'edge', start: '37', end: '1', ontClass: "participates-in"});
 
 
-console.log(arb_data[-1]);
+/**********************/
+/*     VLDB CONF      */
+/**********************/
+var vldb_data = [
+{ts: 1, nid: '1', type: 'node', diameter: 10, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16'], src: 'time'},
+{ts: 2, nid: '2', type: 'node', diameter: 7, color: 'blue', ontClass: "person", literals: ['4', '17'], src: 'space'},
+{ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
+{ts: 4, nid: '4', type: 'literal', text: 'Name: Arjun Satish'},
+{ts: 5, nid: '5', type: 'literal', text: 'URL: http://some.url/ach.jpg'},
+{ts: 1000, nid: '6', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['23', '24'], src: 'conference'},
+{ts: 2000, nid: '7', type: 'edge', start: '6', end: '1', ontClass: "subevent"}];
+
+var ix = 8;
+for (var i = 1; i<=45; i++) {
+  var l1 = {ts: 3000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
+  ix++;
+  vldb_data.push(l1);
+  var p = {ts: 3000+i, nid: '' + ix, type: 'node', diameter: 7, 
+           color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
+  ix++;
+  vldb_data.push(p);
+  var e = {ts: 3000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '6', ontClass: "participates-in"};
+  ix++;
+  vldb_data.push(e);
+}
+
+vldb_data.push({ts: 7000, nid: '143', type: 'source', src: 'facebook'});
+vldb_data.push({ts: 9000, nid: '144', type: 'prune', edge: '40'});
+vldb_data.push({ts: 9000, nid: '145', type: 'prune', edge: '43'});
+vldb_data.push({ts: 12000, nid: '146', type: 'edge', start: '39', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 12000, nid: '146', type: 'edge', start: '42', end: '1', ontClass: "participates-in"});
+
+
+
+
+/**********************/
+/*    TURING CONF     */
+/**********************/
+
+var turing_data = [
+{ts: 1, nid: '1', type: 'node', diameter: 10, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16'], src: 'time'},
+{ts: 2, nid: '2', type: 'node', diameter: 7, color: 'blue', ontClass: "person", literals: ['4', '17'], src: 'space'},
+{ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
+{ts: 4, nid: '4', type: 'literal', text: 'Name: Arjun Satish'},
+{ts: 5, nid: '5', type: 'literal', text: 'URL: http://some.url/ach.jpg'},
+{ts: 1000, nid: '6', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['23', '24'], src: 'calendar'},
+{ts: 2000, nid: '7', type: 'edge', start: '6', end: '1', ontClass: "subevent"},
+{ts: 3500, nid: '8', type: 'source', src: 'conference'}];
+
+var ix = 9;
+for (var i = 1; i<=45; i++) {
+  var l1 = {ts: 5000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
+  ix++;
+  turing_data.push(l1);
+  var p = {ts: 5000+i, nid: '' + ix, type: 'node', diameter: 7, 
+           color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
+  ix++;
+  turing_data.push(p);
+  var e = {ts: 5000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '6', ontClass: "participates-in"};
+  ix++;
+  turing_data.push(e);
+}
+
+turing_data.push({ts: 7000, nid: '143', type: 'source', src: 'twitter'});
+turing_data.push({ts: 9000, nid: '144', type: 'prune', edge: '41'});
+turing_data.push({ts: 12000, nid: '146', type: 'edge', start: '40', end: '1', ontClass: "participates-in"});
+
+
+if (window.location.hash == '#vldb') arb_data = vldb_data;
+else if (window.location.hash == '#turing') arb_data = turing_data;
+
