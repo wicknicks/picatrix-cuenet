@@ -10,6 +10,7 @@ app.configure(function() {
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.use('/vis', express.static(__dirname + '/public'));
   app.use(express.logger('dev'));
 });
 
