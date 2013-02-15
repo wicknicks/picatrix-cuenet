@@ -115,7 +115,7 @@ turing_data.push({ts: 7000, nid: '143', type: 'source', src: 'twitter'});
 turing_data.push({ts: 9000, nid: '144', type: 'prune', edge: '41'});
 turing_data.push({ts: 12000, nid: '146', type: 'edge', start: '40', end: '1', ontClass: "participates-in"});
 
-
+arb_data = []
 if (window.location.hash == '#vldb') arb_data = vldb_data;
 else if (window.location.hash == '#turing') arb_data = turing_data;
 
