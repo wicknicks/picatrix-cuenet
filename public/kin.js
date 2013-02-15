@@ -84,6 +84,7 @@ var yOffset = -25;
 
 var imagesArr = [];
 var sourceIcons = [];
+var displayAreas = [];
 
 for (var i=0; i<icons.length; i++) {
 
@@ -91,7 +92,7 @@ for (var i=0; i<icons.length; i++) {
   var bwSourceIcon = new Image();
   var images = [sourceIcon, bwSourceIcon];
   imagesArr.push(images);
-  sourceIcon.onload = function() {
+  bwSourceIcon.onload = function() {
   
     var iconDisplayArea = new Kinetic.Layer();
     var j = this.index;
@@ -105,17 +106,17 @@ for (var i=0; i<icons.length; i++) {
     image.setY (stage.getHeight() / 2 + yOffset);
     
     iconDisplayArea.add(image);
-    sourceIcons.push(image);
     stage.add(iconDisplayArea);
+    sourceIcons[j] = image;
+    displayAreas[j] = iconDisplayArea;
   }
   
   sourceIcon.src = icons[i][iconOffset];
   sourceIcon.index = i;
   bwSourceIcon.src = icons[i][bwIconOffset];
+  bwSourceIcon.index = i;
 
 }
-
-//imageObj.src = 'images/thumbs/DSC_0402.JPG';
 
 var rectPanel = new Kinetic.Rect({
   width: $(window).width() - 50,
@@ -129,8 +130,6 @@ rectPanel.setOpacity(0.3);
 layer.add(rectPanel);
 stage.add(layer);
 
-
-
 /*
 // add the shape to the layer
 layer.add(publicDataCircle);
@@ -141,10 +140,11 @@ layer.add(dataCircle);
 stage.add(layer);
 */
 
-
-
 var id = setInterval( function() {
-  
+  var r = Math.floor(Math.random()*icons.length);
+  var ix = Math.floor(Math.random()*2);
+  sourceIcons[r].setImage(imagesArr[r][ix]);
+  displayAreas[r].draw();  
 }, 1000);
 
 setTimeout(function() { clearInterval(id) }, 20000); 
