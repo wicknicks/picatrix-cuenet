@@ -77,10 +77,11 @@ vldb_data.push({ts: 7000, nid: '143', type: 'source', src: 'facebook'});
 vldb_data.push({ts: 9000, nid: '144', type: 'prune', edge: '40'});
 vldb_data.push({ts: 9000, nid: '145', type: 'prune', edge: '43'});
 vldb_data.push({ts: 12000, nid: '146', type: 'edge', start: '39', end: '1', ontClass: "participates-in"});
-vldb_data.push({ts: 12000, nid: '146', type: 'edge', start: '42', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 12000, nid: '147', type: 'edge', start: '42', end: '1', ontClass: "participates-in"});
 
-
-
+vldb_data.push({ts: 14000, nid: '148', type: 'source', src: 'gmail'});
+vldb_data.push({ts: 16000, nid: '145', type: 'prune', edge: '46'});
+vldb_data.push({ts: 19000, nid: '147', type: 'edge', start: '45', end: '1', ontClass: "participates-in"});
 
 /**********************/
 /*    TURING CONF     */
