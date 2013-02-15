@@ -6,75 +6,16 @@ var stage = new Kinetic.Stage({
 
 var layer = new Kinetic.Layer();
 
-var publicDataCircle = new Kinetic.Circle({
-  x: stage.getWidth() / 2,
-  y: stage.getHeight() / 2,
-  radius: 300,
-  fill: '#e8aead',
-  stroke: '#7a96bb',
-  strokeWidth: 4
-});
-
-var socialDataCircle = new Kinetic.Circle({
-  x: stage.getWidth() / 2,
-  y: stage.getHeight() / 2,
-  radius: 250,
-  fill: '#fcd5b5',
-  stroke: '#7a96bb',
-  strokeWidth: 4
-});
-
-var personalDataCircle = new Kinetic.Circle({
-  x: stage.getWidth() / 2,
-  y: stage.getHeight() / 2,
-  radius: 200,
-  fill: '#c3d69b',
-  stroke: '#7a96bb',
-  strokeWidth: 4
-});
-
-var metadataCircle = new Kinetic.Circle({
-  x: stage.getWidth() / 2,
-  y: stage.getHeight() / 2,
-  radius: 150,
-  fill: '#b9cde5',
-  stroke: '#7a96bb',
-  strokeWidth: 4
-});
-
-var dataCircle = new Kinetic.Circle({
-  x: stage.getWidth() / 2,
-  y: stage.getHeight() / 2,
-  radius: 100,
-  fill: '#ffffff',
-  stroke: '#7a96bb',
-  strokeWidth: 4
-});
-
-var imageObj = new Image();
-imageObj.onload = function() {
-  var imgLayer = new Kinetic.Layer();
-  var kImage = new Kinetic.Image({
-    x: (stage.getWidth() - imageObj.width) / 2 ,
-    y: (stage.getHeight() - imageObj.height) / 2,
-    image: imageObj,
-    width: imageObj.width,
-    height: imageObj.height
-  });
-  imgLayer.add(kImage);
-  
-  // add the layer to the stage
-  stage.add(imgLayer);
-};
-
-
 var icons = [ ['images/sources/clock-red.png', 'images/sources/brights/clock-red.png'],
 ['images/sources/maps-icon.png', 'images/sources/brights/maps-icon.png'],
 ['images/sources/gmail.png', 'images/sources/brights/gmail.png'],
 ['images/sources/google-calendar.png', 'images/sources/brights/google-calendar.png'],
 ['images/sources/facebook.png', 'images/sources/brights/facebook.png'],
-['images/sources/upcoming-logo.png', 'images/sources/brights/upcoming-logo.png'],
-['images/sources/yelp-icon.png', 'images/sources/brights/yelp-icon.png'] ];
+['images/sources/twitter-icon.png', 'images/sources/brights/twitter-icon.png'],
+['images/sources/dblp.png', 'images/sources/brights/dblp.png'],
+['images/sources/C-icon.png', 'images/sources/brights/upcoming-logo.png'],
+['images/sources/upcoming-logo.png', 'images/sources/brights/upcoming-logo.png']
+];
 
 var ix = 3;
 var iconOffset = 0;
@@ -85,6 +26,7 @@ var yOffset = -25;
 var imagesArr = [];
 var sourceIcons = [];
 var displayAreas = [];
+var circles = [];
 
 for (var i=0; i<icons.length; i++) {
 
@@ -92,7 +34,7 @@ for (var i=0; i<icons.length; i++) {
   var bwSourceIcon = new Image();
   var images = [sourceIcon, bwSourceIcon];
   imagesArr.push(images);
-  bwSourceIcon.onload = function() {
+  sourceIcon.onload = function() {
   
     var iconDisplayArea = new Kinetic.Layer();
     var j = this.index;
@@ -102,11 +44,32 @@ for (var i=0; i<icons.length; i++) {
       height: this.height / 2
     });
     
-    image.setX ((j * stage.getWidth() / (icons.length)) + 50);
-    image.setY (stage.getHeight() / 2 + yOffset);
+    var circle = new Kinetic.Circle({
+      radius: 40,
+      fill: '#006400',
+      stroke: 'black',
+      strokeWidth: 1
+    });
     
+    circle.setX((j * stage.getWidth() / (icons.length)) + 50 + 25);
+    circle.setY(stage.getHeight() / 2 + yOffset + 25);
+    
+    if (j == 0) {
+      image.setX ((j * stage.getWidth() / (icons.length)) + 45);
+      image.setY (stage.getHeight() / 2 + yOffset - 5);
+    }
+    else {
+      image.setX ((j * stage.getWidth() / (icons.length)) + 50);
+      image.setY (stage.getHeight() / 2 + yOffset);
+    }
+        
+    circle.setOpacity(0.75);
+    circle.hide();
+    iconDisplayArea.add(circle);
     iconDisplayArea.add(image);
     stage.add(iconDisplayArea);
+    
+    circles[j] = circle;
     sourceIcons[j] = image;
     displayAreas[j] = iconDisplayArea;
   }
@@ -130,23 +93,42 @@ rectPanel.setOpacity(0.3);
 layer.add(rectPanel);
 stage.add(layer);
 
-/*
-// add the shape to the layer
-layer.add(publicDataCircle);
-layer.add(socialDataCircle);
-layer.add(personalDataCircle);
-layer.add(metadataCircle);
-layer.add(dataCircle);
-stage.add(layer);
-*/
+function render_circle(j) {
+  if ( !arb_data[j].src ) return;
+  var p;
+  if (arb_data[j].src == 'time') p = 0;
+  else if (arb_data[j].src == 'space') p = 1;
+  else if (arb_data[j].src == 'gmail') p = 2;
+  else if (arb_data[j].src == 'google-calendar') p = 3;
+  else if (arb_data[j].src == 'facebook') p = 4;
+  else if (arb_data[j].src == 'twitter') p = 5;
+  else if (arb_data[j].src == 'dblp') p = 6;
+  else if (arb_data[j].src == 'conference') p = 7;
+  else if (arb_data[j].src == 'upcoming') p = 8;
+  console.log(arb_data[j]);
+  console.log("p = " + p + " " + circles.length);
+  circles[p].show();
+  displayAreas[p].draw();
+}
 
+$(document).ready(function() {
+  var j=0;
+  for (var i=0; i<arb_data.length; i++) {
+     setTimeout(function() {
+       render_circle(j++);
+     }, arb_data[i].ts);
+  }
+});
+
+/*
 var id = setInterval( function() {
   var r = Math.floor(Math.random()*icons.length);
   var ix = Math.floor(Math.random()*2);
-  sourceIcons[r].setImage(imagesArr[r][ix]);
+  circles[r].show();
+  //sourceIcons[r].setImage(imagesArr[r][ix]);
   displayAreas[r].draw();  
 }, 1000);
 
 setTimeout(function() { clearInterval(id) }, 20000); 
-console.log('interval id: ' + id);
+console.log('interval id: ' + id); */
 

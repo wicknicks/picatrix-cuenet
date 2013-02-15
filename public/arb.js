@@ -71,15 +71,17 @@ var Renderer = function(canvas) {
         var handler = {
           clicked:function(e) {
             var pos = $(canvas).offset();
-            console.log(pos);
+            console.log("pos = " + pos.left + " " + pos.top )
+            console.log("pageX,Y = " + e.pageX + " " + e.pageY);
             _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
-            console.log(_mouseP);
             dragged = particleSystem.nearest(_mouseP);
 
             if (dragged && dragged.node !== null) dragged.node.fixed = true
          
             var diameter = arb_data[dragged.node.name - 1].diameter;
-            if (dragged.distance < diameter) nodeClicked(particleSystem, dragged.node);
+            console.log("distance = " + dragged.distance + " " + diameter);
+            if (dragged.distance < diameter) 
+              nodeClicked(particleSystem, dragged.node);
 
             $(canvas).bind('mousemove', handler.dragged)
             $(window).bind('mouseup', handler.dropped)
@@ -152,8 +154,7 @@ var Renderer = function(canvas) {
   
     //$('canvas')[0].width = $(window).width() - 15;
     //$('canvas')[0].height = $(window).height() - 15;
-
-      
+    
     //add some hundred participants to conference event in conference arb_data
     var ix = 27;
     for (var i = 1; i<=45; i++) {
@@ -169,7 +170,7 @@ var Renderer = function(canvas) {
       arb_data.push(e);
     }
     
-    
+    console.log($('#viewport').width(), $('#viewport').height());
     var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
