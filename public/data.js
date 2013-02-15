@@ -27,3 +27,23 @@ var arb_data = [
 {ts: 4000, nid: '26', type: 'literal', text: 'Name: Ramesh Jain'}
 ];
 
+//add some hundred participants to conference event in conference arb_data
+var ix = 27;
+for (var i = 1; i<=45; i++) {
+  var l1 = {ts: 8000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
+  ix++;
+  arb_data.push(l1);
+  var p = {ts: 8000+i, nid: '' + ix, type: 'node', diameter: 3, 
+           color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
+  ix++;
+  arb_data.push(p);
+  var e = {ts: 8000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '22', ontClass: "participates-in"};
+  ix++;
+  arb_data.push(e);
+}
+
+arb_data.push({ts: 21000, nid: '162', type: 'prune', edge: '38', src: 'facebook'});
+arb_data.push({ts: 22000, nid: '163', type: 'edge', start: '37', end: '1', ontClass: "participates-in"});
+
+
+console.log(arb_data[-1]);

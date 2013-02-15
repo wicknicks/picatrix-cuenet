@@ -105,8 +105,6 @@ function render_circle(j) {
   else if (arb_data[j].src == 'dblp') p = 6;
   else if (arb_data[j].src == 'conference') p = 7;
   else if (arb_data[j].src == 'upcoming') p = 8;
-  console.log(arb_data[j]);
-  console.log("p = " + p + " " + circles.length);
   circles[p].show();
   displayAreas[p].draw();
 }
@@ -119,7 +117,7 @@ $(document).ready(function() {
          render_circle(j++);
        }, arb_data[i].ts);
     }
-  }, 1000)
+  }, 1000);
 });
 
 /*

@@ -155,21 +155,6 @@ var Renderer = function(canvas) {
     //$('canvas')[0].width = $(window).width() - 15;
     //$('canvas')[0].height = $(window).height() - 15;
     
-    //add some hundred participants to conference event in conference arb_data
-    var ix = 27;
-    for (var i = 1; i<=45; i++) {
-      var l1 = {ts: 8000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
-      ix++;
-      arb_data.push(l1);
-      var p = {ts: 8000+i, nid: '' + ix, type: 'node', diameter: 3, 
-               color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
-      ix++;
-      arb_data.push(p);
-      var e = {ts: 8000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '22', ontClass: "participates-in"};
-      ix++;
-      arb_data.push(e);
-    }
-    
     console.log($('#viewport').width(), $('#viewport').height());
     var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
     sys.parameters( {gravity: true, friction: 0.75} );
