@@ -146,7 +146,15 @@ function setupRightPanel() {
     rightPanelStage.add(layer);
   }
 
-  imageObj.src = 'images/jump.png'
+  var jumps = ['images/jump.0.png', 'images/jump.1.png', 
+                'images/jump.2.png', 'images/jump.3.png'];
+  var ix = 0;
+  
+  var id = setInterval(function() {
+    imageObj.src = jumps[ix++];
+    if (ix > 3) clearInterval(id);
+  }, 1000);
+  
 }
 
 
