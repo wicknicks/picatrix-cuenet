@@ -150,13 +150,14 @@ var Renderer = function(canvas) {
     }
   }
   
+  var sys;
   $(document).ready(function() {
   
     //$('canvas')[0].width = $(window).width() - 15;
     //$('canvas')[0].height = $(window).height() - 15;
     
     console.log($('#viewport').width(), $('#viewport').height());
-    var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+    sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
     

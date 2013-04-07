@@ -4,6 +4,12 @@ var stage = new Kinetic.Stage({
   height: 85
 });
 
+var rightPanelStage = new Kinetic.Stage({
+  container: 'rightpanel',
+  width: 350,
+  height: $(window).height() - 130
+});
+
 var layer = new Kinetic.Layer();
 
 var icons = [ ['images/sources/clock-red.png', 'images/sources/brights/clock-red.png'],
@@ -118,17 +124,30 @@ $(document).ready(function() {
        }, arb_data[i].ts);
     }
   }, 1000);
+  
+  setupRightPanel();
+  
 });
 
-/*
-var id = setInterval( function() {
-  var r = Math.floor(Math.random()*icons.length);
-  var ix = Math.floor(Math.random()*2);
-  circles[r].show();
-  //sourceIcons[r].setImage(imagesArr[r][ix]);
-  displayAreas[r].draw();  
-}, 1000);
 
-setTimeout(function() { clearInterval(id) }, 20000); 
-console.log('interval id: ' + id); */
+function setupRightPanel() {
+  var layer = new Kinetic.Layer();
+
+  var imageObj = new Image();
+  imageObj.onload = function() {
+    var yoda = new Kinetic.Image({
+      x: 20,
+      y: 25,
+      image: imageObj,
+      width: 300,
+      height: 349
+    });
+    layer.add(yoda);
+    rightPanelStage.add(layer);
+  }
+
+  imageObj.src = 'images/jump.png'
+}
+
+
 

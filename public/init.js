@@ -1,12 +1,16 @@
 function main() {
   
   $('#viewport').css ({
-    width: $(window).width() - 50,
+    width: $(window).width() - 350,
     height: $(window).height() - 130,
     position: 'absolute',
     top: '20px',
     marginLeft: '25px',
     marginRight: '25px'
+  });
+  
+  $('#rightpanel').css ({
+    marginLeft: $(window).width() - 350,
   });
 
   var canvas = $('#viewport')[0];
@@ -25,6 +29,10 @@ function main() {
   context.strokeRect(0, 0, canvas.width, canvas.height);
   
   console.log(canvas.width + " " + canvas.height);
+  
+  
+  
+  
 }
 
 $(document).ready( main );
