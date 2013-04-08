@@ -142,8 +142,9 @@ function setupRightPanel() {
       width: 300,
       height: 349
     });
+    
     layer.add(yoda);
-    rightPanelStage.add(layer);
+    rightPanelStage.add(layer); 
   }
 
   var jumps = ['images/jump.0.png', 'images/jump.1.png', 
@@ -155,6 +156,33 @@ function setupRightPanel() {
     if (ix > 3) clearInterval(id);
   }, 1000);
   
+  var simpleText = new Kinetic.Text({
+    x: 20,
+    y: 400,
+    text: 'Last Beneficial Source',
+    fontSize: 18,
+    fontFamily: 'Calibri',
+    fill: 'black',
+    width: 300,
+    padding: 20,
+    align: 'center',
+    height: 200
+  });
+  
+  var rect = new Kinetic.Rect({
+    x: 20,
+    y: 400,
+    stroke: 'black',
+    strokeWidth: 1,
+    fill: '#ddd',
+    width: 300,
+    height: simpleText.getHeight()
+  });
+  
+  layer.add(rect);
+  layer.add(simpleText);
+    
+  rightPanelStage.add(layer); 
 }
 
 
