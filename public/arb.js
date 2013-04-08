@@ -1,4 +1,7 @@
 var something;
+var photo = new Image();
+photo.src = "http://cuenet.site44.com/vldb.jpg";
+
 
 var Renderer = function(canvas) {
     var canvas = $(canvas).get(0)
@@ -40,7 +43,10 @@ var Renderer = function(canvas) {
 
           // draw a rectangle centered at pt
           var egNode = arb_data[node.name - 1];
-          if (egNode.type == 'node') {
+          if (egNode.type == 'node' && egNode.ontClass == 'photo-capture-event') {
+            ctx.drawImage(photo, pt.x - photo.width/2, pt.y - photo.height/2);
+          }
+          else if (egNode.type == 'node') {
             var w = egNode.diameter;
             ctx.beginPath();
             ctx.arc(pt.x, pt.y, w, 0, 2 * Math.PI, true);
@@ -156,18 +162,22 @@ var Renderer = function(canvas) {
     //$('canvas')[0].width = $(window).width() - 15;
     //$('canvas')[0].height = $(window).height() - 15;
     
-    console.log($('#viewport').width(), $('#viewport').height());
-    sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
-    sys.parameters( {gravity: true, friction: 0.75} );
-    sys.renderer = Renderer("#viewport");
+    photo.onload = function() {
     
-    setTimeout( function() {
-      var j=0;
-      for (var i=0; i<arb_data.length; i++) {
-        setTimeout( function() {
-          render_node(sys, j++);
-        }, arb_data[i].ts);
-      }
-    }, 1000);
+      console.log($('#viewport').width(), $('#viewport').height());
+      sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+      sys.parameters( {gravity: true, friction: 0.75} );
+      sys.renderer = Renderer("#viewport");
+      
+      setTimeout( function() {
+        var j=0;
+        for (var i=0; i<arb_data.length; i++) {
+          setTimeout( function() {
+            render_node(sys, j++);
+          }, arb_data[i].ts);
+        }
+      }, 1000);
+    
+    }
   });
 
