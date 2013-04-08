@@ -1,4 +1,15 @@
 function main() {
+/*
+  $('#viewport').css ({
+    width: $(window).width(),
+    height: $(window).height() 
+  });
+
+  var canvas = $('#viewport')[0];
+  
+  canvas.width = $(window).width() - 15;
+  canvas.height = $(window).height() - 15;
+*/
   
   $('#viewport').css ({
     width: $(window).width() - 350,
@@ -9,15 +20,16 @@ function main() {
     marginRight: '25px'
   });
   
+
   $('#rightpanel').css ({
     marginLeft: $(window).width() - 350,
   });
 
   var canvas = $('#viewport')[0];
   
-  canvas.width = $(window).width() - 15;
-  canvas.height = $(window).height() - 15;
-  
+  canvas.width = $('#viewport').width();
+  canvas.height = $('#viewport').height();
+   
   var context = canvas.getContext("2d");
   context.globalAlpha = 0.3;
   
@@ -29,9 +41,6 @@ function main() {
   context.strokeRect(0, 0, canvas.width, canvas.height);
   
   console.log(canvas.width + " " + canvas.height);
-  
-  
-  
   
 }
 

@@ -166,6 +166,7 @@ var Renderer = function(canvas) {
     
       console.log($('#viewport').width(), $('#viewport').height());
       sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+      //sys = arbor.ParticleSystem($(window).width(), $(window).height());
       sys.parameters( {gravity: true, friction: 0.75} );
       sys.renderer = Renderer("#viewport");
       

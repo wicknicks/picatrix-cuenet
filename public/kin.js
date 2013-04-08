@@ -181,6 +181,32 @@ function setupRightPanel() {
   
   layer.add(rect);
   layer.add(simpleText);
+  
+  var simpleText2 = new Kinetic.Text({
+    x: 20,
+    y: 620,
+    text: 'Control Box',
+    fontSize: 18,
+    fontFamily: 'Calibri',
+    fill: 'black',
+    width: 300,
+    padding: 20,
+    align: 'center',
+    height: 200
+  });
+  
+  var rect2 = new Kinetic.Rect({
+    x: 20,
+    y: 620,
+    stroke: 'black',
+    strokeWidth: 1,
+    fill: '#ddd',
+    width: 300,
+    height: simpleText.getHeight()
+  });
+  
+  layer.add(rect2);
+  layer.add(simpleText2);
     
   rightPanelStage.add(layer); 
 }
