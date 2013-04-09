@@ -1,6 +1,6 @@
 var something;
 var photo = new Image();
-photo.src = "http://cuenet.site44.com/vldb.jpg";
+photo.src = "images/data/vldb.jpg";
 
 
 var Renderer = function(canvas) {
@@ -74,11 +74,10 @@ var Renderer = function(canvas) {
       
       initMouseHandling:function() {
         var dragged = null;
+        var fDragged = false;
         var handler = {
           clicked:function(e) {
             var pos = $(canvas).offset();
-            console.log("pos = " + pos.left + " " + pos.top )
-            console.log("pageX,Y = " + e.pageX + " " + e.pageY);
             _mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top)
             dragged = particleSystem.nearest(_mouseP);
 
@@ -86,9 +85,10 @@ var Renderer = function(canvas) {
          
             var diameter = arb_data[dragged.node.name - 1].diameter;
             console.log("distance = " + dragged.distance + " " + diameter);
-            if (dragged.distance < diameter) 
-              nodeClicked(particleSystem, dragged.node);
 
+            if (dragged.distance > diameter) return;
+            
+            fDragged = false;
             $(canvas).bind('mousemove', handler.dragged)
             $(window).bind('mouseup', handler.dropped)
 
@@ -104,12 +104,14 @@ var Renderer = function(canvas) {
               dragged.node.p = p;
             }
             
+            fDragged = true;
             return false;
           },
 
-          dropped:function(e){
+          dropped:function(e) {
             if (dragged===null || dragged.node===undefined) return;
             if (dragged.node !== null) dragged.node.fixed = false;
+            if (!fDragged) nodeClicked(particleSystem, dragged.node);
             dragged.node.tempMass = 1000;
             dragged = null;
             $(canvas).unbind('mousemove', handler.dragged);
@@ -156,29 +158,21 @@ var Renderer = function(canvas) {
     }
   }
   
-  var sys;
-  $(document).ready(function() {
+  photo.onload = function() {
+    console.log($('#viewport').width(), $('#viewport').height());
+    var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+    //var sys = arbor.ParticleSystem($(window).width(), $(window).height());
+    sys.parameters( {gravity: true, friction: 0.75} );
+    sys.renderer = Renderer("#viewport");
+    
+    setTimeout( function() {
+      var j=0;
+      for (var i=0; i<arb_data.length; i++) {
+        setTimeout( function() {
+          render_node(sys, j++);
+        }, arb_data[i].ts);
+      }
+    }, 1000);
+  }
   
-    //$('canvas')[0].width = $(window).width() - 15;
-    //$('canvas')[0].height = $(window).height() - 15;
-    
-    photo.onload = function() {
-    
-      console.log($('#viewport').width(), $('#viewport').height());
-      sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
-      //sys = arbor.ParticleSystem($(window).width(), $(window).height());
-      sys.parameters( {gravity: true, friction: 0.75} );
-      sys.renderer = Renderer("#viewport");
-      
-      setTimeout( function() {
-        var j=0;
-        for (var i=0; i<arb_data.length; i++) {
-          setTimeout( function() {
-            render_node(sys, j++);
-          }, arb_data[i].ts);
-        }
-      }, 1000);
-    
-    }
-  });
 
