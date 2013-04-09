@@ -21,10 +21,19 @@ function main() {
   });
   
 
-  $('#rightpanel').css ({
+  $('#rightpanel').css({
     marginLeft: $(window).width() - 350,
   });
 
+  
+  $('#controlpanel').css({
+    height: '25px',
+    marginLeft: $(window).width() - 300,
+    marginTop: "40px"
+  })
+  
+  $('#controlpanel').html("<button id='btnNext'>Proceed to Next Iteration !</button>");
+  
   var canvas = $('#viewport')[0];
   
   canvas.width = $('#viewport').width();

@@ -116,7 +116,7 @@ function render_circle(j) {
 }
 
 $(document).ready(function() {
-  setTimeout(function() {
+  /*setTimeout(function() {
     var j=0;
     for (var i=0; i<arb_data.length; i++) {
        setTimeout(function() {
@@ -124,7 +124,7 @@ $(document).ready(function() {
        }, arb_data[i].ts);
     }
   }, 1000);
-  
+  */
   setupRightPanel();
   
 });
@@ -182,6 +182,7 @@ function setupRightPanel() {
   layer.add(rect);
   layer.add(simpleText);
   
+  /*
   var simpleText2 = new Kinetic.Text({
     x: 20,
     y: 520,
@@ -207,8 +208,11 @@ function setupRightPanel() {
   
   layer.add(rect2);
   layer.add(simpleText2);
+  
+  */
     
   rightPanelStage.add(layer); 
+  
 }
 
 

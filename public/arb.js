@@ -177,14 +177,13 @@ var Renderer = function(canvas) {
     }
     */
     
-    setTimeout( function() {
-      var j=0;
-      for (var i=0; i<arb_data.length; i++) {
-        setTimeout( function() {
-          render_node(sys, j++);
-        }, arb_data[i].ts);
-      }
-    }, 1000);
+    var j=0;
+    for (var i=0; i<arb_data.length; i++) {
+      setTimeout( function() {
+        render_node(sys, j);
+        render_circle(j++);
+      }, arb_data[i].ts);
+    }
     
   }
   
