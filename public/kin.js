@@ -166,7 +166,7 @@ function setupRightPanel() {
     width: 300,
     padding: 20,
     align: 'center',
-    height: 200
+    height: 100
   });
   
   var rect = new Kinetic.Rect({
@@ -184,7 +184,7 @@ function setupRightPanel() {
   
   var simpleText2 = new Kinetic.Text({
     x: 20,
-    y: 620,
+    y: 520,
     text: 'Control Box',
     fontSize: 18,
     fontFamily: 'Calibri',
@@ -192,12 +192,12 @@ function setupRightPanel() {
     width: 300,
     padding: 20,
     align: 'center',
-    height: 200
+    height: 100
   });
   
   var rect2 = new Kinetic.Rect({
     x: 20,
-    y: 620,
+    y: 520,
     stroke: 'black',
     strokeWidth: 1,
     fill: '#ddd',
