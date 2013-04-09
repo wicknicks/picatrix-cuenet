@@ -150,7 +150,13 @@ var Renderer = function(canvas) {
     if (arb_data.length <= ix) return;
     var msg = arb_data[ix];
     if (msg.type == 'edge') {
-      var e = sys.addEdge(msg.start, msg.end);
+      var e;
+      if (arb_data[msg.start-1].ontClass == "photo-capture-event")
+        e = sys.addEdge(msg.start, msg.end, {length: 5});
+      else if (arb_data[msg.end-1].ontClass == "photo-capture-event")
+        e = sys.addEdge(msg.start, msg.end, {length: 5});
+      else
+        e = sys.addEdge(msg.start, msg.end);
       edgeMap[msg.nid] = e;
     }
     if (msg.type == 'prune') {
@@ -165,6 +171,12 @@ var Renderer = function(canvas) {
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
     
+    /*
+    for (var i=0; i<arb_data.length; i++) {
+        render_node(sys, i);
+    }
+    */
+    
     setTimeout( function() {
       var j=0;
       for (var i=0; i<arb_data.length; i++) {
@@ -173,6 +185,7 @@ var Renderer = function(canvas) {
         }, arb_data[i].ts);
       }
     }, 1000);
+    
   }
   
 
