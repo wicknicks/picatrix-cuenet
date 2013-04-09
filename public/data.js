@@ -56,7 +56,7 @@ var vldb_data = [
 {ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
 {ts: 4, nid: '4', type: 'literal', text: 'photo-capture-event'},
 {ts: 5, nid: '5', type: 'edge', start: '4', end: '1', ontClass: "type-of"},
-{ts: 1000, nid: '6', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['23', '24'], src: 'conference'},
+{ts: 1000, nid: '6', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['7', '26'], src: 'conference'},
 {ts: 1004, nid: '7', type: 'literal', text: 'conference'},
 {ts: 1005, nid: '8', type: 'edge', start: '6', end: '7', ontClass: "type-of"},
 {ts: 2000, nid: '9', type: 'edge', start: '6', end: '1', ontClass: "subevent"}];
@@ -67,7 +67,7 @@ for (var i = 1; i<=45; i++) {
   ix++;
   vldb_data.push(l1);
   var p = {ts: 3000+i, nid: '' + ix, type: 'node', diameter: 7, 
-           color: 'blue', ontClass: "person", literals: [l1.nid, 17]};
+           color: 'blue', ontClass: "person", literals: [l1.nid, 153]};
   ix++;
   vldb_data.push(p);
   var e = {ts: 3000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '6', ontClass: "participates-in"};
@@ -84,6 +84,7 @@ vldb_data.push({ts: 12000, nid: '149', type: 'edge', start: '44', end: '1', ontC
 vldb_data.push({ts: 14000, nid: '150', type: 'source', src: 'gmail'});
 vldb_data.push({ts: 16000, nid: '147', type: 'prune', edge: '48'});
 vldb_data.push({ts: 19000, nid: '149', type: 'edge', start: '47', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 19000, nid: '151', type: 'literal', text: 'OntClass: person'});
 
 /**********************/
 /*    TURING CONF     */
