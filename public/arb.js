@@ -164,10 +164,30 @@ var Renderer = function(canvas) {
     }
   }
   
+  
+  var skips = [5, 8, 9, 144, 149, -1];
+  var skip_ix = 0;
+  var i=0, j=0;
+  var sys;
+  
+  function controller() {
+    var limit = skips[skip_ix];
+    if (limit == -1) limit = arb_data.length;
+    for (; i<limit; i++) {
+      setTimeout( function() {
+        render_node(sys, j);
+        render_circle(j++);
+      }, arb_data[i].ts);
+    }
+    
+    skip_ix += 1;  
+    if (skip_ix == skips.length) skip_ix--;
+  }
+  
   photo.onload = function() {
     console.log($('#viewport').width(), $('#viewport').height());
-    var sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
-    //var sys = arbor.ParticleSystem($(window).width(), $(window).height());
+    sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+    //sys = arbor.ParticleSystem($(window).width(), $(window).height());
     sys.parameters( {gravity: true, friction: 0.75} );
     sys.renderer = Renderer("#viewport");
     
@@ -177,14 +197,9 @@ var Renderer = function(canvas) {
     }
     */
     
-    var j=0;
-    for (var i=0; i<arb_data.length; i++) {
-      setTimeout( function() {
-        render_node(sys, j);
-        render_circle(j++);
-      }, arb_data[i].ts);
-    }
-    
+    $('#btnNext').bind('click', controller);
+    controller();    
   }
+ 
   
 

@@ -63,27 +63,27 @@ var vldb_data = [
 
 var ix = 10;
 for (var i = 1; i<=45; i++) {
-  var l1 = {ts: 3000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
+  var l1 = {ts: 1000+i, nid: '' + ix, type: 'literal', text: 'Name: attendee #' + i};
   ix++;
   vldb_data.push(l1);
-  var p = {ts: 3000+i, nid: '' + ix, type: 'node', diameter: 7, 
+  var p = {ts: 1000+i, nid: '' + ix, type: 'node', diameter: 7, 
            color: 'blue', ontClass: "person", literals: [l1.nid, 153]};
   ix++;
   vldb_data.push(p);
-  var e = {ts: 3000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '6', ontClass: "participates-in"};
+  var e = {ts: 1000+i, nid: '' + ix, type: 'edge', start: p.nid, end: '6', ontClass: "participates-in"};
   ix++;
   vldb_data.push(e);
 }
 
-vldb_data.push({ts: 7000, nid: '145', type: 'source', src: 'facebook'});
-vldb_data.push({ts: 9000, nid: '146', type: 'prune', edge: '42'});
-vldb_data.push({ts: 9000, nid: '147', type: 'prune', edge: '45'});
-vldb_data.push({ts: 12000, nid: '148', type: 'edge', start: '41', end: '1', ontClass: "participates-in"});
-vldb_data.push({ts: 12000, nid: '149', type: 'edge', start: '44', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 1000, nid: '145', type: 'source', src: 'facebook'});
+vldb_data.push({ts: 3000, nid: '146', type: 'prune', edge: '42'});
+vldb_data.push({ts: 3000, nid: '147', type: 'prune', edge: '45'});
+vldb_data.push({ts: 6000, nid: '148', type: 'edge', start: '41', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 6000, nid: '149', type: 'edge', start: '44', end: '1', ontClass: "participates-in"});
 
-vldb_data.push({ts: 14000, nid: '150', type: 'source', src: 'gmail'});
-vldb_data.push({ts: 16000, nid: '147', type: 'prune', edge: '48'});
-vldb_data.push({ts: 19000, nid: '149', type: 'edge', start: '47', end: '1', ontClass: "participates-in"});
+vldb_data.push({ts: 1000, nid: '150', type: 'source', src: 'gmail'});
+vldb_data.push({ts: 3000, nid: '147', type: 'prune', edge: '48'});
+vldb_data.push({ts: 5000, nid: '149', type: 'edge', start: '47', end: '1', ontClass: "participates-in"});
 vldb_data.push({ts: 19000, nid: '151', type: 'literal', text: 'OntClass: person'});
 
 /**********************/
