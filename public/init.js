@@ -1,15 +1,4 @@
 function main() {
-/*
-  $('#viewport').css ({
-    width: $(window).width(),
-    height: $(window).height() 
-  });
-
-  var canvas = $('#viewport')[0];
-  
-  canvas.width = $(window).width() - 15;
-  canvas.height = $(window).height() - 15;
-*/
   
   $('#viewport').css ({
     width: $(window).width() - 350,
@@ -20,21 +9,30 @@ function main() {
     marginRight: '25px'
   });
   
-
   $('#rightpanel').css({
-    marginTop: "20px",
     marginLeft: $(window).width() - 350,
     height: $(window).height() - 135
   });
 
-  
   $('#controlpanel').css({
     height: '25px',
-    marginLeft: "20px",
+    marginLeft: "40px",
     marginTop: "40px"
-  })
+  });
   
   $('#controlpanel').html("<button id='btnNext'>Proceed to Next Iteration!</button>");
+
+  $('#sourcetrace').css({
+    width: "300px",
+    height: ($(window).height() - $('#controlpanel').height() - 540) + "px",
+    marginLeft: "40px",
+    borderStyle: "solid",
+    borderWidth: "1px"
+  });
+
+  $('#sspanel').css({
+    marginLeft: "20px"
+  })
   
   var canvas = $('#viewport')[0];
   

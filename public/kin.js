@@ -5,9 +5,9 @@ var stage = new Kinetic.Stage({
 });
 
 var rightPanelStage = new Kinetic.Stage({
-  container: 'rightpanel',
+  container: 'sspanel',
   width: 350,
-  height: $(window).height() - 130
+  height: 380 //$(window).height() - 130
 });
 
 var layer = new Kinetic.Layer();
@@ -116,17 +116,7 @@ function render_circle(j) {
 }
 
 $(document).ready(function() {
-  /*setTimeout(function() {
-    var j=0;
-    for (var i=0; i<arb_data.length; i++) {
-       setTimeout(function() {
-         render_circle(j++);
-       }, arb_data[i].ts);
-    }
-  }, 1000);
-  */
   setupRightPanel();
-  
 });
 
 
@@ -156,64 +146,4 @@ function setupRightPanel() {
     if (ix > 3) clearInterval(id);
   }, 1000);
   
-  var simpleText = new Kinetic.Text({
-    x: 20,
-    y: 400,
-    text: 'Last Beneficial Source',
-    fontSize: 18,
-    fontFamily: 'Calibri',
-    fill: 'black',
-    width: 300,
-    padding: 20,
-    align: 'center',
-    height: 100
-  });
-  
-  var rect = new Kinetic.Rect({
-    x: 20,
-    y: 400,
-    stroke: 'black',
-    strokeWidth: 1,
-    fill: '#ddd',
-    width: 300,
-    height: simpleText.getHeight()
-  });
-  
-  layer.add(rect);
-  layer.add(simpleText);
-  
-  /*
-  var simpleText2 = new Kinetic.Text({
-    x: 20,
-    y: 520,
-    text: 'Control Box',
-    fontSize: 18,
-    fontFamily: 'Calibri',
-    fill: 'black',
-    width: 300,
-    padding: 20,
-    align: 'center',
-    height: 100
-  });
-  
-  var rect2 = new Kinetic.Rect({
-    x: 20,
-    y: 520,
-    stroke: 'black',
-    strokeWidth: 1,
-    fill: '#ddd',
-    width: 300,
-    height: simpleText.getHeight()
-  });
-  
-  layer.add(rect2);
-  layer.add(simpleText2);
-  
-  */
-    
-  rightPanelStage.add(layer); 
-  
 }
-
-
-
