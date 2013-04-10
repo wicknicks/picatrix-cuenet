@@ -20,14 +20,27 @@ function main() {
     marginTop: "40px"
   });
   
-  $('#controlpanel').html("<button id='btnNext'>Proceed to Next Iteration!</button>");
+  $('#controlpanel').html("<button id='btnNext'>Proceed!</button>");
+  $('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
+  $('#controlpanel').append("<button id='btnSSCrunch'>Prune!</button>");
 
   $('#sourcetrace').css({
     width: "300px",
     height: ($(window).height() - $('#controlpanel').height() - 540) + "px",
     marginLeft: "40px",
     borderStyle: "solid",
-    borderWidth: "1px"
+    borderWidth: "0px"
+  });
+
+  $('#sourcetrace').html("<div id='sourceTraceContainer'></div>" +
+    "<button id='btnSourceTracePrevious'>Previous</button>" +
+    "<button id='btnSourceTraceNext'>Next</button>");
+
+  $('#sourceTraceContainer').css({
+    width: "auto",
+    height: $('#sourcetrace').height()-25,
+    borderStyle: "solid",
+    borderWidth: "0px"
   });
 
   $('#sspanel').css({
@@ -50,7 +63,28 @@ function main() {
   context.strokeRect(0, 0, canvas.width, canvas.height);
   
   console.log(canvas.width + " " + canvas.height);
-  
+
+
+  var images = ['beach1.jpg', 'beach2.jpg', 'beach3.jpg', 'beach4.jpg', 'beach5.jpg'];
+
+  var template = '<div style="margin-top:-10px">\
+      <p> #{TEXT} </p>\
+      <img src="http://cloud.github.com/downloads/malsup/cycle/#{URL}" width="200" height="200" />\
+    </div>';
+    
+  var counter = -1;
+  function cycleAppend() {
+    $('#sourceTraceContainer').cycle('destroy');
+    counter++;
+    if (counter == images.length) return;
+    var t = template.replace(/#\{URL\}/g, images[counter]);
+    t = t.replace(/#\{TEXT\}/g, "some content " + counter);
+    $('#sourceTraceContainer').append(t);
+
+    $('#sourceTraceContainer').cycle({fx: 'fade', speed: 'fast', timeout: 0,  next: '#btnSourceTraceNext', prev: '#btnSourceTracePrevious'});
+  }
+
+  $('#btnSourceTrace').bind('click', cycleAppend);
 }
 
 $(document).ready( main );
