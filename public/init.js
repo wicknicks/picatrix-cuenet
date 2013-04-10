@@ -22,17 +22,19 @@ function main() {
   
 
   $('#rightpanel').css({
+    marginTop: "20px",
     marginLeft: $(window).width() - 350,
+    height: $(window).height() - 135
   });
 
   
   $('#controlpanel').css({
     height: '25px',
-    marginLeft: $(window).width() - 300,
+    marginLeft: "20px",
     marginTop: "40px"
   })
   
-  $('#controlpanel').html("<button id='btnNext'>Proceed to Next Iteration !</button>");
+  $('#controlpanel').html("<button id='btnNext'>Proceed to Next Iteration!</button>");
   
   var canvas = $('#viewport')[0];
   

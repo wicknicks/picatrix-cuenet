@@ -51,7 +51,7 @@ arb_data.push({ts: 22000, nid: '163', type: 'edge', start: '37', end: '1', ontCl
 /*     VLDB CONF      */
 /**********************/
 var vldb_data = [
-{ts: 1, nid: '1', type: 'node', diameter: 10, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16'], src: 'time'},
+{ts: 1, nid: '1', type: 'node', diameter: 100, color: 'red', ontClass: "photo-capture-event", literals: ['5', '16'], src: 'time'},
 {ts: 2, nid: '2', type: 'node', diameter: 7, color: 'blue', ontClass: "person", literals: ['4', '17'], src: 'space'},
 {ts: 3, nid: '3', type: 'edge', start: '2', end: '1', ontClass: "participates-in"},
 {ts: 4, nid: '4', type: 'literal', text: 'photo-capture-event'},
@@ -59,7 +59,7 @@ var vldb_data = [
 {ts: 1000, nid: '6', type: 'node', diameter: 20, color: 'green', ontClass: "conference", literals: ['7', '26'], src: 'conference'},
 {ts: 1004, nid: '7', type: 'literal', text: 'conference'},
 {ts: 1005, nid: '8', type: 'edge', start: '6', end: '7', ontClass: "type-of"},
-{ts: 2000, nid: '9', type: 'edge', start: '6', end: '1', ontClass: "subevent"}];
+{ts: 1000, nid: '9', type: 'edge', start: '6', end: '1', ontClass: "subevent"}];
 
 var ix = 10;
 for (var i = 1; i<=45; i++) {
