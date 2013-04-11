@@ -191,7 +191,8 @@ function setupRightPanel() {
   $('#btnSSPrune').bind('click', searchSpacePrune);
 
   rightPanelStage.add(layer);
-
+  
+  /*
   var imageObj = new Image();
   imageObj.onload = function() {
     var yoda = new Kinetic.Image({
@@ -210,7 +211,7 @@ function setupRightPanel() {
   'images/jump.2.png', 'images/jump.3.png'];
   var ix = 0;
   
-  /*
+  
   var id = setInterval(function() {
     imageObj.src = jumps[ix++];
     if (ix > 3) clearInterval(id);
