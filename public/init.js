@@ -21,8 +21,8 @@ function main() {
   });
   
   $('#controlpanel').html("<button id='btnNext'>Proceed!</button>");
+  $('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
   $('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
-  $('#controlpanel').append("<button id='btnSSCrunch'>Prune!</button>");
 
   $('#sourcetrace').css({
     width: "300px",
@@ -65,23 +65,28 @@ function main() {
   console.log(canvas.width + " " + canvas.height);
 
 
-  var images = ['beach1.jpg', 'beach2.jpg', 'beach3.jpg', 'beach4.jpg', 'beach5.jpg'];
+  var images = icons.map(function(f){return f[0]});
 
   var template = '<div style="margin-top:-10px">\
       <p> #{TEXT} </p>\
-      <img src="http://cloud.github.com/downloads/malsup/cycle/#{URL}" width="200" height="200" />\
+      <img src="#{URL}" width="200" height="200" />\
     </div>';
     
   var counter = -1;
   function cycleAppend() {
-    $('#sourceTraceContainer').cycle('destroy');
     counter++;
-    if (counter == images.length) return;
+    if (counter >= images.length) return;
+    $('#sourceTraceContainer').cycle('destroy');
     var t = template.replace(/#\{URL\}/g, images[counter]);
     t = t.replace(/#\{TEXT\}/g, "some content " + counter);
     $('#sourceTraceContainer').append(t);
 
-    $('#sourceTraceContainer').cycle({fx: 'fade', speed: 'fast', timeout: 0,  next: '#btnSourceTraceNext', prev: '#btnSourceTracePrevious'});
+    $('#sourceTraceContainer').cycle({fx: 'fade', 
+      speed: 'fast', 
+      timeout: 0,
+      startingSlide: counter,
+      next: '#btnSourceTraceNext', 
+      prev: '#btnSourceTracePrevious'});
   }
 
   $('#btnSourceTrace').bind('click', cycleAppend);

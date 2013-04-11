@@ -41,7 +41,7 @@ for (var i=0; i<icons.length; i++) {
   var images = [sourceIcon, bwSourceIcon];
   imagesArr.push(images);
   sourceIcon.onload = function() {
-  
+
     var iconDisplayArea = new Kinetic.Layer();
     var j = this.index;
     var image = new Kinetic.Image({
@@ -68,7 +68,7 @@ for (var i=0; i<icons.length; i++) {
       image.setX ((j * stage.getWidth() / (icons.length)) + 50);
       image.setY (stage.getHeight() / 2 + yOffset);
     }
-        
+
     circle.setOpacity(0.75);
     circle.hide();
     iconDisplayArea.add(circle);
@@ -119,9 +119,78 @@ $(document).ready(function() {
   setupRightPanel();
 });
 
-
 function setupRightPanel() {
   var layer = new Kinetic.Layer();
+
+  var outline = new Kinetic.Rect({
+    x: 20, y: 20,
+    width: 300,
+    height: 350,
+    fill: '#ffffff',
+    stroke: 'black',
+    strokeWidth: '1px'
+  });
+
+  var rectPanel = new Kinetic.Rect({
+    x: 20, y: 20,
+    width: 300,
+    height: 350,
+    fill: '#A9C6FF',
+    opacity: 0.1
+  });
+
+  layer.add(outline);
+  layer.add(rectPanel);
+
+  var candidatePanel = null;
+  var candidatePanels = [];
+  var candidateScores = [];
+  //var colors = ['#F8655D', '#3399FF', '#33CC33', '#62F0CE']
+  var colors = ['#FFFFFF', '#BBBBBB', '#777777', '#333333', '#000000']
+  var tempscores = templist = null;
+  
+  for (var i=0; i<10; i++) {
+    templist = []
+    tempscores = []
+    for (var j=0; j<10; j++) {
+      candidatePanel = new Kinetic.Rect({
+        x: 20 + 30 * j, y: 20 + 35 * i,
+        width: 30,
+        height: 35,
+        fill: colors[0],
+        opacity: 0.8
+      });
+      templist.push(candidatePanel);
+      tempscores.push(0);
+    }
+    candidatePanels.push(templist);
+    candidateScores.push(tempscores);
+  }
+
+  for (var i=0; i<10; i++) {
+    for (var j=0; j<10; j++) {
+      layer.add(candidatePanels[i][j]);
+    }
+  }
+
+  var max = 50;
+  function searchSpacePrune() {
+    var limit = Math.floor(Math.random()*max);
+    max = max/2;
+    console.log(limit);
+    var x, y;
+    for (var i=0; i<limit; i++) {
+      x = Math.floor(Math.random()*10);
+      y = Math.floor(Math.random()*10);
+      candidateScores[x][y]++;
+      candidatePanels[x][y].attrs.fill = colors[candidateScores[x][y]];
+    }
+    layer.draw();
+  }
+
+  $('#btnSSPrune').bind('click', searchSpacePrune);
+
+  rightPanelStage.add(layer);
 
   var imageObj = new Image();
   imageObj.onload = function() {
@@ -138,12 +207,13 @@ function setupRightPanel() {
   }
 
   var jumps = ['images/jump.0.png', 'images/jump.1.png', 
-                'images/jump.2.png', 'images/jump.3.png'];
+  'images/jump.2.png', 'images/jump.3.png'];
   var ix = 0;
   
+  /*
   var id = setInterval(function() {
     imageObj.src = jumps[ix++];
     if (ix > 3) clearInterval(id);
   }, 1000);
-  
+*/
 }
