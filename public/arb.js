@@ -185,11 +185,11 @@ var Renderer = function(canvas) {
   }
   
   photo.onload = function() {
-    console.log($('#viewport').width(), $('#viewport').height());
-    sys = arbor.ParticleSystem($('#viewport').width(), $('#viewport').height(), 0.5);
+    console.log($('#arbcanvas').width(), $('#arbcanvas').height());
+    sys = arbor.ParticleSystem($('#arbcanvas').width(), $('#arbcanvas').height(), 0.5);
     //sys = arbor.ParticleSystem($(window).width(), $(window).height());
     sys.parameters( {gravity: true, friction: 0.75} );
-    sys.renderer = Renderer("#viewport");
+    sys.renderer = Renderer("#arbcanvas");
     
     /*
     for (var i=0; i<arb_data.length; i++) {

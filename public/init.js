@@ -1,6 +1,6 @@
 function main() {
   
-  $('#viewport').css ({
+  $('#arbcanvas').css ({
     width: $(window).width() - 350,
     height: $(window).height() - 130,
     position: 'absolute',
@@ -23,7 +23,7 @@ function main() {
   $('#controlpanel').html("<button id='btnNext'>Proceed!</button>");
   $('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
   $('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
-    $('#controlpanel').append("<button id='dummy'>TEXT</button>");
+  $('#controlpanel').append("<button id='dummy'>TEXT</button>");
 
   $('#sourcetrace').css({
     width: "300px",
@@ -48,11 +48,11 @@ function main() {
     marginLeft: "20px"
   })
   
-  var canvas = $('#viewport')[0];
+  var canvas = $('#arbcanvas')[0];
   
-  canvas.width = $('#viewport').width();
-  canvas.height = $('#viewport').height();
-   
+  canvas.width = $('#arbcanvas').width();
+  canvas.height = $('#arbcanvas').height();
+  
   var context = canvas.getContext("2d");
   context.globalAlpha = 0.3;
   
@@ -69,10 +69,10 @@ function main() {
   var images = icons.map(function(f){return f[0]});
 
   var template = '<div style="margin-top:-10px">\
-      <p> #{TEXT} </p>\
-      <img src="#{URL}" width="200" height="200" />\
-    </div>';
-    
+  <p> #{TEXT} </p>\
+  <img src="#{URL}" width="200" height="200" />\
+  </div>';
+  
   var counter = -1;
   function cycleAppend() {
     counter++;
