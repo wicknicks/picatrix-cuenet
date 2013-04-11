@@ -23,6 +23,7 @@ function main() {
   $('#controlpanel').html("<button id='btnNext'>Proceed!</button>");
   $('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
   $('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
+    $('#controlpanel').append("<button id='dummy'>TEXT</button>");
 
   $('#sourcetrace').css({
     width: "300px",

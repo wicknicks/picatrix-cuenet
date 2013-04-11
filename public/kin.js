@@ -146,8 +146,9 @@ function setupRightPanel() {
   var candidatePanels = [];
   var candidateScores = [];
   //var colors = ['#F8655D', '#3399FF', '#33CC33', '#62F0CE']
-  var colors = ['#FFFFFF', '#BBBBBB', '#777777', '#333333', '#000000']
-  var tempscores = templist = null;
+  //var colors = ['#FFFFFF', '#BBBBBB', '#777777', '#333333', '#000000']
+    var colors = ['#E6E6FF', '#9999FF', '#6666FF', '#3333FF', '#0000FF'];
+    var tempscores = templist = null;
   
   for (var i=0; i<10; i++) {
     templist = []
@@ -160,6 +161,9 @@ function setupRightPanel() {
         fill: colors[0],
         opacity: 0.8
       });
+	candidatePanel.on('mousemove', function() {
+	    $('#dummy').html(this.attrs.x + ", " + this.attrs.y);
+	});
       templist.push(candidatePanel);
       tempscores.push(0);
     }
@@ -175,13 +179,15 @@ function setupRightPanel() {
 
   var max = 50;
   function searchSpacePrune() {
-    var limit = Math.floor(Math.random()*max);
+      var limit = max;//Math.floor(Math.random()*max);
     max = max/2;
     console.log(limit);
     var x, y;
-    for (var i=0; i<limit; i++) {
-      x = Math.floor(Math.random()*10);
-      y = Math.floor(Math.random()*10);
+    for (var i=100-limit; i<100; i++) {
+	x = Math.floor(i/10);
+	y = Math.floor(i%10);
+      //x = Math.floor(Math.random()*10);
+      //y = Math.floor(Math.random()*10);
       candidateScores[x][y]++;
       candidatePanels[x][y].attrs.fill = colors[candidateScores[x][y]];
     }
