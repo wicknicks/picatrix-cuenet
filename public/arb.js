@@ -237,6 +237,9 @@ var Renderer = function(canvas) {
 
     candidateScores[x][y]=value;
     candidatePanels[x][y].attrs.fill = colors[value];
+  }
+
+  function rank_update() {
     candidateLayer.draw();
   }
 
@@ -272,6 +275,8 @@ var Renderer = function(canvas) {
         sourceTraceAppend(events[ix].html)
       else if (events[ix].type == 'rank')
         setTimeout(rank, events[ix].ts, events[ix].node, events[ix].score);
+      else if (events[ix].type == 'updateSearchPanel')
+        setTimeout(rank_update, events[ix].ts);
       //console.log(JSON.stringify(events[ix]));
     }
   }
