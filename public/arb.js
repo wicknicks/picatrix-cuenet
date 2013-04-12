@@ -1,7 +1,7 @@
 var something;
 //var photo = nodeImages[4];
 var photo = new Image();
-photo.src = "images/data/vldb.jpg";
+photo.src = "images/data/vldb-hide-all.jpg";
 
 var bktest = []
 var bkcount = 0;

@@ -10,7 +10,9 @@ var nodeImages = ["images/data/vldb-show-all.jpg",
 "images/data/atish.jpg",
 "images/data/danupon.jpg",
 "images/data/jennie.jpg",
-"images/data/arjun.jpg"
+"images/data/arjun.jpg",
+"images/data/vldb-phase-2.jpg",
+"images/data/vldb-phase-1.jpg"
 ];
 
 var photos = []
@@ -45,6 +47,9 @@ var events = [
 {type: 'suspend'},
 
 {ts: 0, type: 'switch', node: "1100", image: photos[4] },
+{type: 'suspend'},
+
+{ts: 0, type: 'switch', node: "1000", image: photos[5] },
 {type: 'suspend'},
 
 {type: 'source', label: 'conference'},
@@ -277,6 +282,8 @@ var events = [
 {ts: 5500, type: "highlight", node: "1121", color: "blue"},
 {type: 'suspend'},
 
+{ts: 0, type: 'switch', node: "1000", image: photos[6] },
+{type: 'suspend'},
 
 {type: 'source', label: 'gmail'},
 {type: 'trace', qno: 1, source: 'gmail', html: htmlcontent[5]},
