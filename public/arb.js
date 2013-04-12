@@ -221,22 +221,22 @@ var Renderer = function(canvas) {
   }
 
   function prune_edge(edgeId) {
-    console.log(edgeId);
     sys.pruneEdge(edgeMap[edgeId])
   }
 
   function highlight(high) {
     invertedIx[high.node].color = high.color;
-    if (high.color == 'red') rank(high.node)
+    //if (high.color == 'red') rank(high.node)
   }
 
-  function rank(nid) {
+  function rank(nid, value) {
     var x,y;
     var loc = nid - 1100;
     x = Math.floor(loc/10);
     y = Math.floor(loc%10);
-    candidateScores[x][y]++;
-    candidatePanels[x][y].attrs.fill = colors[candidateScores[x][y]];
+
+    candidateScores[x][y]=value;
+    candidatePanels[x][y].attrs.fill = colors[value];
     candidateLayer.draw();
   }
 
@@ -259,7 +259,7 @@ var Renderer = function(canvas) {
       if (events[ix].type == 'suspend') 
         { j++; ix++; break; }
       else if (events[ix].type == 'node' && events[ix].ontClass == 'person')
-        rank(events[ix].nid)
+        setTimeout(rank, 2500, events[ix].nid, 1)
       else if (events[ix].type == 'edge') 
         setTimeout(render_edge, events[ix].ts, events[ix].nid);
       else if (events[ix].type == 'prune') 
@@ -270,6 +270,8 @@ var Renderer = function(canvas) {
         render_circle(events, ix)
       else if (events[ix].type == 'trace')
         sourceTraceAppend(events[ix].html)
+      else if (events[ix].type == 'rank')
+        setTimeout(rank, events[ix].ts, events[ix].node, events[ix].score);
       //console.log(JSON.stringify(events[ix]));
     }
   }
