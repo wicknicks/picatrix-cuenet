@@ -42,7 +42,7 @@ var Renderer = function(canvas) {
           // pt: {x:#, y:#} node position in screen coords
 
           // draw a rectangle centered at pt
-          var egNode = arb_data[node.name - 1];
+          var egNode = invertedIx[node.name];
           if (egNode.type == 'node' && egNode.ontClass == 'photo-capture-event') {
             ctx.drawImage(photo, pt.x - photo.width/2, pt.y - photo.height/2);
           }
@@ -83,7 +83,8 @@ var Renderer = function(canvas) {
 
             if (dragged && dragged.node !== null) dragged.node.fixed = true
          
-            var diameter = arb_data[dragged.node.name - 1].diameter;
+            //var diameter = arb_data[dragged.node.name - 1].diameter;
+            var diameter = invertedIx[dragged.node.name].diameter;
             console.log("distance = " + dragged.distance + " " + diameter);
 
             if (dragged.distance > diameter) return;
@@ -127,6 +128,8 @@ var Renderer = function(canvas) {
   } 
   
   function nodeClicked(sys, node) {
+    console.log(node);
+    /*
     var lnodes = [];
     var ledges = [];
     var literals = arb_data[node.name - 1].literals;
@@ -138,14 +141,14 @@ var Renderer = function(canvas) {
       lit_edge = sys.addEdge(node, lit_node);
       lnodes.push(lit_node); ledges.push(lit_edge);
     }
-    
+    */
     /*setTimeout(function() {
       for (var i=0; i<lnodes.length; i++) sys.pruneNode(lnodes[i]);
       //for (var i=0; i<ledges.length-1; i++) sys.pruneEdge(ledges[i+1]);
     }, 10000);*/
   }
   
-  var edgeMap = {};
+  /*
   function render_node(sys, ix) {
     if (arb_data.length <= ix) return;
     var msg = arb_data[ix];
@@ -164,12 +167,12 @@ var Renderer = function(canvas) {
     }
   }
   
-  
   var skips = [5, 8, 9, 144, 149, -1];
   var skip_ix = 0;
   var i=0, j=0;
   var sys;
   
+  //OLD Controller
   function controller() {
     var limit = skips[skip_ix];
     if (limit == -1) limit = arb_data.length;
@@ -182,8 +185,61 @@ var Renderer = function(canvas) {
     
     skip_ix += 1;  
     if (skip_ix == skips.length) skip_ix--;
+  }*/
+
+  var edgeMap = {};
+  function render_edge(ix) {
+    var msg = invertedIx[ix];
+    if (invertedIx[msg.start].ontClass == "photo-capture-event")
+      e = sys.addEdge(msg.start, msg.end, {length: 5});
+    else if (invertedIx[msg.end].ontClass == "photo-capture-event")
+      e = sys.addEdge(msg.start, msg.end, {length: 5});
+    else
+      e = sys.addEdge(msg.start, msg.end);
+    edgeMap[msg.nid] = e;
   }
-  
+
+  function prune_edge(edgeId) {
+    console.log(edgeId);
+    sys.pruneEdge(edgeMap[edgeId])
+  }
+
+  function highlight(high) {
+    invertedIx[high.node].color = high.color;
+  }
+
+  var counter = 0;
+  function sourceTraceAppend(html) {
+    $('#sourceTraceContainer').cycle('destroy');
+    $('#sourceTraceContainer').append(html);
+    $('#sourceTraceContainer').cycle({fx: 'fade', 
+      speed: 'fast', 
+      timeout: 0,
+      startingSlide: counter++,
+      next: '#btnSourceTraceNext', 
+      prev: '#btnSourceTracePrevious'});
+  }
+
+  var ix = 0;
+  var j = 0;
+  function controller() {
+    for (; ix < events.length; ix++) {
+      if (events[ix].type == 'suspend') 
+        { j++; ix++; break; }
+      else if (events[ix].type == 'edge') 
+        setTimeout(render_edge, events[ix].ts, events[ix].nid);
+      else if (events[ix].type == 'prune') 
+        setTimeout(prune_edge, events[ix].ts, events[ix].edge);
+      else if (events[ix].type == 'highlight') 
+        setTimeout(highlight, events[ix].ts, events[ix]);
+      else if (events[ix].type == 'source')
+        render_circle(events, ix)
+      else if (events[ix].type == 'trace')
+        sourceTraceAppend(events[ix].html)
+      //console.log(JSON.stringify(events[ix]));
+    }
+  }
+    
   photo.onload = function() {
     console.log($('#arbcanvas').width(), $('#arbcanvas').height());
     sys = arbor.ParticleSystem($('#arbcanvas').width(), $('#arbcanvas').height(), 0.5);

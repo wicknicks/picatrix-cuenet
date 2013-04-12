@@ -1,5 +1,5 @@
 function main() {
-  
+
   $('#arbcanvas').css ({
     width: $(window).width() - 350,
     height: $(window).height() - 130,
@@ -17,13 +17,15 @@ function main() {
   $('#controlpanel').css({
     height: '25px',
     marginLeft: "40px",
-    marginTop: "40px"
+    marginTop: "20px"
   });
   
-  $('#controlpanel').html("<button id='btnNext'>Proceed!</button>");
-  $('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
-  $('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
-  $('#controlpanel').append("<button id='dummy'>TEXT</button>");
+  $('#controlpanel').html("<button id='btnNext' width='100%'>Proceed!</button>");
+  //$('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
+  //$('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
+  //$('#controlpanel').append("<button id='dummy'>TEXT</button>");
+
+  $('#btnNext').width($('#controlpanel').width()-25);
 
   $('#sourcetrace').css({
     width: "300px",
@@ -36,10 +38,12 @@ function main() {
   $('#sourcetrace').html("<div id='sourceTraceContainer'></div>" +
     "<button id='btnSourceTracePrevious'>Previous</button>" +
     "<button id='btnSourceTraceNext'>Next</button>");
+  $('#btnSourceTracePrevious').width($('#controlpanel').width()/2-25);
+  $('#btnSourceTraceNext').width($('#controlpanel').width()/2-25);
 
   $('#sourceTraceContainer').css({
     width: "auto",
-    height: $('#sourcetrace').height()-25,
+    height: $('#sourcetrace').height(),
     borderStyle: "solid",
     borderWidth: "0px"
   });
@@ -52,7 +56,7 @@ function main() {
   
   canvas.width = $('#arbcanvas').width();
   canvas.height = $('#arbcanvas').height();
-  
+
   var context = canvas.getContext("2d");
   context.globalAlpha = 0.3;
   
@@ -72,7 +76,7 @@ function main() {
   <p> #{TEXT} </p>\
   <img src="#{URL}" width="200" height="200" />\
   </div>';
-  
+
   var counter = -1;
   function cycleAppend() {
     counter++;
@@ -90,7 +94,7 @@ function main() {
       prev: '#btnSourceTracePrevious'});
   }
 
-  $('#btnSourceTrace').bind('click', cycleAppend);
+  //$('#btnSourceTrace').bind('click', cycleAppend);
 }
 
 $(document).ready( main );

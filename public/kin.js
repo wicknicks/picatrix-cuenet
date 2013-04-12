@@ -99,18 +99,18 @@ rectPanel.setOpacity(0.3);
 layer.add(rectPanel);
 stage.add(layer);
 
-function render_circle(j) {
-  if ( !arb_data[j].src ) return;
+function render_circle(data, j) {
+  if ( !data[j].label ) return;
   var p;
-  if (arb_data[j].src == 'time') p = 0;
-  else if (arb_data[j].src == 'space') p = 1;
-  else if (arb_data[j].src == 'gmail') p = 2;
-  else if (arb_data[j].src == 'calendar') p = 3;
-  else if (arb_data[j].src == 'facebook') p = 4;
-  else if (arb_data[j].src == 'twitter') p = 5;
-  else if (arb_data[j].src == 'dblp') p = 6;
-  else if (arb_data[j].src == 'conference') p = 7;
-  else if (arb_data[j].src == 'upcoming') p = 8;
+  if (data[j].label == 'time') p = 0;
+  else if (data[j].label == 'space') p = 1;
+  else if (data[j].label == 'gmail') p = 2;
+  else if (data[j].label == 'calendar') p = 3;
+  else if (data[j].label == 'facebook') p = 4;
+  else if (data[j].label == 'twitter') p = 5;
+  else if (data[j].label == 'dblp') p = 6;
+  else if (data[j].label == 'conference') p = 7;
+  else if (data[j].label == 'upcoming') p = 8;
   circles[p].show();
   displayAreas[p].draw();
 }
@@ -194,7 +194,7 @@ function setupRightPanel() {
     layer.draw();
   }
 
-  $('#btnSSPrune').bind('click', searchSpacePrune);
+  //$('#btnSSPrune').bind('click', searchSpacePrune);
 
   rightPanelStage.add(layer);
   
