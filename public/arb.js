@@ -258,8 +258,8 @@ var Renderer = function(canvas) {
     for (; ix < events.length; ix++) {
       if (events[ix].type == 'suspend') 
         { j++; ix++; break; }
-      else if (events[ix].type == 'node' && events[ix].ontClass == 'person')
-        setTimeout(rank, 2500, events[ix].nid, 1)
+      //else if (events[ix].type == 'node' && events[ix].ontClass == 'person')
+      //  setTimeout(rank, 2500, events[ix].nid, 1)
       else if (events[ix].type == 'edge') 
         setTimeout(render_edge, events[ix].ts, events[ix].nid);
       else if (events[ix].type == 'prune') 

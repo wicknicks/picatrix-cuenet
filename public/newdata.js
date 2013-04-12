@@ -24,6 +24,7 @@ var events = [
 {ts: 0, type: 'node', nid: '1000', diameter: 100, url: 'images/data/vldb.jpg', ontClass: "photo-capture-event"},
 {ts: 0, type: 'node', nid: '1100', diameter: 7, color: 'blue', ontClass: "person"},
 {ts: 0, type: 'edge', nid: '1011', start: '1000', end: '1100', ontClass: "participates-in"},
+{ts: 0, type:"rank", node:"1100", score: 1},
 {type: 'suspend'},
 
 {type: 'source', label: 'conference'},
