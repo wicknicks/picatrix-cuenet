@@ -2,6 +2,17 @@ var something;
 var photo = new Image();
 photo.src = "images/data/vldb.jpg";
 
+var bktest = []
+var bkcount = 0;
+for (var i=1; i<=100; i++) {
+  var p = new Image();
+  bktest.push(p);
+  //p.src = 'images/mugs/' + i + '.jpg';
+  p.onload = function() {
+    bkcount++;
+    if (bkcount == 100) console.log('loaded images')
+  }
+}
 
 var Renderer = function(canvas) {
     var canvas = $(canvas).get(0)
@@ -20,6 +31,16 @@ var Renderer = function(canvas) {
       
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       
+        /*ctx.globalAlpha = 0.75;
+        var x = y = 0;
+        for (var i=0; i<bktest.length; i++) {
+          ctx.drawImage(bktest[i], x, y, 100, 100);
+          x += 100
+          if (x > canvas.width - 100) { 
+            x = 0
+            y+=100
+          }
+        }*/
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = '#CC5422'; // set canvas background color
         ctx.fillRect(0, 0, canvas.width, canvas.height);  // now fill the canvas
@@ -206,6 +227,17 @@ var Renderer = function(canvas) {
 
   function highlight(high) {
     invertedIx[high.node].color = high.color;
+    if (high.color == 'red') rank(high.node)
+  }
+
+  function rank(nid) {
+    var x,y;
+    var loc = nid - 1100;
+    x = Math.floor(loc/10);
+    y = Math.floor(loc%10);
+    candidateScores[x][y]++;
+    candidatePanels[x][y].attrs.fill = colors[candidateScores[x][y]];
+    candidateLayer.draw();
   }
 
   var counter = 0;
@@ -226,6 +258,8 @@ var Renderer = function(canvas) {
     for (; ix < events.length; ix++) {
       if (events[ix].type == 'suspend') 
         { j++; ix++; break; }
+      else if (events[ix].type == 'node' && events[ix].ontClass == 'person')
+        rank(events[ix].nid)
       else if (events[ix].type == 'edge') 
         setTimeout(render_edge, events[ix].ts, events[ix].nid);
       else if (events[ix].type == 'prune') 

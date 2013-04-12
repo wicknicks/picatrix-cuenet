@@ -22,8 +22,8 @@ var events = [
 {ts: 500, type: 'source', label: 'space'},
 {type: 'trace', qno: 1, source: 'space', html: htmlcontent[1]},
 {ts: 0, type: 'node', nid: '1000', diameter: 100, url: 'images/data/vldb.jpg', ontClass: "photo-capture-event"},
-{ts: 0, type: 'node', nid: '1010', diameter: 7, color: 'blue', ontClass: "person"},
-{ts: 0, type: 'edge', nid: '1011', start: '1000', end: '1010', ontClass: "participates-in"},
+{ts: 0, type: 'node', nid: '1100', diameter: 7, color: 'blue', ontClass: "person"},
+{ts: 0, type: 'edge', nid: '1011', start: '1000', end: '1100', ontClass: "participates-in"},
 {type: 'suspend'},
 
 {type: 'source', label: 'conference'},

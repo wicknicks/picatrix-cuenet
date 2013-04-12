@@ -34,6 +34,15 @@ var sourceIcons = [];
 var displayAreas = [];
 var circles = [];
 
+//var colors = ['#F8655D', '#3399FF', '#33CC33', '#62F0CE']
+//var colors = ['#FFFFFF', '#BBBBBB', '#777777', '#333333', '#000000']
+var colors = ['#E6E6FF', '#9999FF', '#6666FF', '#3333FF', '#0000FF']; 
+
+var candidatePanel = null;
+var candidatePanels = [];
+var candidateScores = [];
+var candidateLayer = null;
+
 for (var i=0; i<icons.length; i++) {
 
   var sourceIcon = new Image();
@@ -142,12 +151,7 @@ function setupRightPanel() {
   layer.add(outline);
   layer.add(rectPanel);
 
-  var candidatePanel = null;
-  var candidatePanels = [];
-  var candidateScores = [];
-  //var colors = ['#F8655D', '#3399FF', '#33CC33', '#62F0CE']
-  //var colors = ['#FFFFFF', '#BBBBBB', '#777777', '#333333', '#000000']
-  var colors = ['#E6E6FF', '#9999FF', '#6666FF', '#3333FF', '#0000FF'];
+  
   var tempscores = templist = null;
   
   for (var i=0; i<10; i++) {
@@ -197,6 +201,7 @@ function setupRightPanel() {
   //$('#btnSSPrune').bind('click', searchSpacePrune);
 
   rightPanelStage.add(layer);
+  candidateLayer = layer;
   
   /*
   var imageObj = new Image();
