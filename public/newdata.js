@@ -5,6 +5,23 @@ var person = []
 for (var i=1; i<=100; i++)
   person.push({name:'Arjun Satish', nid: i, mug_url: 'images/mugs/1.jpg'});
 
+
+var nodeImages = ["images/data/vldb-show-all.jpg",
+"images/data/atish.jpg",
+"images/data/danupon.jpg",
+"images/data/jennie.jpg",
+"images/data/arjun.jpg"
+];
+
+var photos = []
+
+for (var i=0; i<nodeImages.length; i++) {
+  var im = new Image();
+  im.src = nodeImages[i];
+  photos.push(im);
+}
+
+
 var htmlcontent = [
 '<table><tr><td><img src="images/sources/clock-red.png"  /></td><td><p>discovering occurs-during property of photo-capture-event</p></td></tr></table>',
 '<table><tr><td><img src="images/sources/maps-icon.png"  /></td><td><p>discovering occurs-at property of photo-capture-event</p></td></tr></table>',
@@ -21,10 +38,13 @@ var events = [
 {type: 'trace', qno: 1, source: 'time', html: htmlcontent[0]},
 {ts: 500, type: 'source', label: 'space'},
 {type: 'trace', qno: 1, source: 'space', html: htmlcontent[1]},
-{ts: 0, type: 'node', nid: '1000', diameter: 100, url: 'images/data/vldb.jpg', ontClass: "photo-capture-event"},
+{ts: 0, type: 'node', nid: '1000', diameter: 100, ontClass: "photo-capture-event"},
 {ts: 0, type: 'node', nid: '1100', diameter: 7, color: 'blue', ontClass: "person"},
 {ts: 0, type: 'edge', nid: '1011', start: '1000', end: '1100', ontClass: "participates-in"},
 {ts: 0, type:"rank", node:"1100", score: 1},
+{type: 'suspend'},
+
+{ts: 0, type: 'switch', node: "1100", image: photos[4] },
 {type: 'suspend'},
 
 {type: 'source', label: 'conference'},
@@ -232,6 +252,9 @@ var events = [
 {ts: 3500, type:"edge", nid:"2010", start:"1127", end:"1000", ontClass:"participates-in"},
 {ts: 3500, type:"edge", nid:"2020", start:"1120", end:"1000", ontClass:"participates-in"},
 
+{ts: 4500, type: 'switch', node: "1120", image: photos[1] },
+{ts: 4500, type: 'switch', node: "1127", image: photos[2] },
+
 {ts: 5500, type: "highlight", node: "1127", color: "blue"},
 {ts: 5500, type: "highlight", node: "1120", color: "blue"},
 {ts: 5500, type: "highlight", node: "1136", color: "blue"},
@@ -260,9 +283,11 @@ var events = [
 {ts: 1000, type: "highlight", node: "1102", color: "red"},
 {ts: 2000, type: "prune", edge: "1152"},
 {ts: 3500, type: "edge", nid:"3000", start:"1102", end:"1000", ontClass:"participates-in"},
+{ts: 4500, type: 'switch', node: "1102", image: photos[3] },
 {ts: 4500, type: "highlight", node: "1102", color: "blue"},
 {ts: 2500, type: 'rank', node: '1102', score: '4'},
 {ts: 2500, type:"updateSearchPanel"},
+{ts: 6000, type: 'switch', node: "1000", image: photos[0] },
 {type: 'suspend'}
 
 ]; //end of events

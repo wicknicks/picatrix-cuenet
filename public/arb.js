@@ -1,4 +1,5 @@
 var something;
+//var photo = nodeImages[4];
 var photo = new Image();
 photo.src = "images/data/vldb.jpg";
 
@@ -64,7 +65,11 @@ var Renderer = function(canvas) {
 
           // draw a rectangle centered at pt
           var egNode = invertedIx[node.name];
-          if (egNode.type == 'node' && egNode.ontClass == 'photo-capture-event') {
+          if (egNode.image) {
+            var pic = egNode.image;
+            ctx.drawImage(pic, pt.x - pic.width/2, pt.y - pic.height/2);
+          }
+          else if (egNode.type == 'node' && egNode.ontClass == 'photo-capture-event') {
             ctx.drawImage(photo, pt.x - photo.width/2, pt.y - photo.height/2);
           }
           else if (egNode.type == 'node') {
@@ -255,6 +260,11 @@ var Renderer = function(canvas) {
       prev: '#btnSourceTracePrevious'});
   }
 
+  function switchImage(nodeId, image) {
+    invertedIx[nodeId].image = image;
+    sys.renderer.redraw();
+  }
+
   var ix = 0;
   var j = 0;
   function controller() {
@@ -277,7 +287,8 @@ var Renderer = function(canvas) {
         setTimeout(rank, events[ix].ts, events[ix].node, events[ix].score);
       else if (events[ix].type == 'updateSearchPanel')
         setTimeout(rank_update, events[ix].ts);
-      //console.log(JSON.stringify(events[ix]));
+      else if (events[ix].type == 'switch') 
+        setTimeout(switchImage, events[ix].ts, events[ix].node, events[ix].image)
     }
   }
     
