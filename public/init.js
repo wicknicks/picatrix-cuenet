@@ -20,12 +20,12 @@ function main() {
     marginTop: "20px"
   });
   
-  $('#controlpanel').html("<button id='btnNext' width='100%'>Proceed!</button>");
+  $('#controlpanel').html("<button id='btnNext' class='btn btn-primary' width='100%'>Proceed!</button>");
   //$('#controlpanel').append("<button id='btnSSPrune'>Prune!</button>");
   //$('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
   //$('#controlpanel').append("<button id='dummy'>TEXT</button>");
 
-  $('#btnNext').width($('#controlpanel').width()-25);
+  $('#btnNext').width($('#controlpanel').width()-45);
 
   $('#sourcetrace').css({
     width: "300px",
@@ -36,10 +36,10 @@ function main() {
   });
 
   $('#sourcetrace').html("<div id='sourceTraceContainer'></div>" +
-    "<button id='btnSourceTracePrevious'>Previous</button>" +
-    "<button id='btnSourceTraceNext'>Next</button>");
-  $('#btnSourceTracePrevious').width($('#controlpanel').width()/2-25);
-  $('#btnSourceTraceNext').width($('#controlpanel').width()/2-25);
+    "<button id='btnSourceTracePrevious' class='btn btn-success' >Previous</button>&nbsp;&nbsp;" +
+    "<button id='btnSourceTraceNext' class='btn btn-success' >Next</button>");
+  $('#btnSourceTracePrevious').width($('#controlpanel').width()/2-45);
+  $('#btnSourceTraceNext').width($('#controlpanel').width()/2-45);
 
   $('#sourceTraceContainer').css({
     width: "auto",
