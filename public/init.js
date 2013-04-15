@@ -25,7 +25,7 @@ function main() {
   //$('#controlpanel').append("<button id='btnSourceTrace'>Source!</button>");
   //$('#controlpanel').append("<button id='dummy'>TEXT</button>");
 
-  $('#btnNext').width($('#controlpanel').width()-45);
+  $('#btnNext').width($('#controlpanel').width()-35);
 
   $('#sourcetrace').css({
     width: "300px",
@@ -36,10 +36,10 @@ function main() {
   });
 
   $('#sourcetrace').html("<div id='sourceTraceContainer'></div>" +
-    "<button id='btnSourceTracePrevious' class='btn btn-success' >Previous</button>&nbsp;&nbsp;" +
-    "<button id='btnSourceTraceNext' class='btn btn-success' >Next</button>");
-  $('#btnSourceTracePrevious').width($('#controlpanel').width()/2-45);
-  $('#btnSourceTraceNext').width($('#controlpanel').width()/2-45);
+    "<button id='btnSourceTracePrevious' class='btn btn-success' >&larr; Previous</button>&nbsp;&nbsp;" +
+    "<button id='btnSourceTraceNext' class='btn btn-success' >Next &rarr;</button>");
+  $('#btnSourceTracePrevious').width($('#controlpanel').width()/2-40);
+  $('#btnSourceTraceNext').width($('#controlpanel').width()/2-40);
 
   $('#sourceTraceContainer').css({
     width: "auto",
