@@ -11,7 +11,8 @@ app.configure(function() {
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   app.use('/vis', express.static(__dirname + '/public'));
-  app.use(express.logger('dev'));
+  app.use(express.logger('[:method] :remote-addr :url'));
+  //app.use(express.logger('dev'));
 });
 
 var APP_PORT = 8080;
